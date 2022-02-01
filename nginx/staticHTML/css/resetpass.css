@@ -1,0 +1,96 @@
+#main_inner {
+    min-height: 0;
+    padding: 270px 0;
+    background: #D5F0F3;
+}
+
+#reg_box {
+    width: 320px;
+    background: #f7f7f7;
+    border-radius: 5px;
+    border: 2px #40e3c0 solid;
+    margin: 0 auto;
+    padding: 5px 15px;
+}
+
+#reg_box h2 {
+    padding-top: 20px;
+    font-size: 20px;
+    color: #e46c0a;
+}
+
+#reg_box form {
+    padding: 20px 0;
+    border-bottom: 1px #e7e7e7 solid;
+}
+
+#reg_box .input_box {
+    margin-bottom: 13px;
+    position: relative;
+}
+
+#reg_box .input_box input {
+    width: 310px;
+    height: 35px;
+    border: 1px #aaa solid;
+    border-radius: 3px;
+    padding-left: 10px;
+    box-shadow: 0px 0px 5px #999 inset;
+    -webkit-transition: .2s ease-in-out;
+}
+
+#reg_box .input_box input:focus {
+    border: 1px #eb6621 solid;
+    box-shadow: 0px 0px 5px #f9c4a8 inset;
+    box-shadow: 0px 0px 5px #f9c4a8;
+}
+
+#reg_box form .submit {
+    margin-top: 10px;
+    width: 100px;
+    height: 27px;
+    color: #fff;
+    font-size: 18px;
+    background: #f8935e;
+    border: 2px #ff7708 solid;
+    float: right;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#reg_box .input_box p {
+    padding-top: 10px;
+    border: none;
+    color: #f8935e;
+}
+
+#reg_box .input_box.true span {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    z-index: 30;
+    width: 20px;
+    height: 20px;
+    background: url(../images/reg_true_tip.png) no-repeat;
+}
+
+#reg_box strong {
+    display: block;
+    color: #f8935e;
+    text-align: center;
+}
+
+#reg_box p {
+    text-align: center;
+    border-top: 1px #ccc solid;
+}
+
+#reg_box a {
+    line-height: 40px;
+    color: #333;
+}
+
+#reg_box a:hover {
+    color: #f9894e;
+    text-decoration: underline;
+}

@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background:#fff;
+}
+#main_inner{
+	min-height:740px;
+	background:#fff;
+	padding-top:90px;
+}
+#intro_pic{
+	padding-top:50px;
+	display:block;
+	width:800px;
+	margin:0 auto;
+}
+h3{
+	font-size:24px;
+	text-align:center;
+
+}
+p{
+	font-size:16px;
+	text-align:center;
+}
+h3 img{
+	display:inline;
+}
+#join_us{
+	display:block;
+	width: 120px;
+	height: 34px;
+	margin:20px auto;
+	line-height:34px;
+	text-align:center;
+	color: #333333;
+	font-size: 18px;
+	background: #00dbac;
+	border: 2px #00dbac solid;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+}
+h4{
+	font-size:24px;
+	text-align:center;
+}
+h5{
+	font-size:24px;
+	text-align:center;
+}
+#des-center{
+	padding-top:20px;
+	width:300px;
+	margin:0 auto;
+}
+#des{
+	width:100%;
+}
+#des-left{
+	float:left;
+	padding-left:50px;
+	width:300px;
+}
+#des-right{
+	float:right;
+	padding-right:50px;
+	width:300px;
+}

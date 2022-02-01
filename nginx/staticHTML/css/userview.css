@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+
+#user_photo{
+	width:150px;
+	height:150px;
+	float:left;
+	padding:6px;
+	background:#fff;
+	border:1px #e3e3e3 solid;
+	border-radius:5px;
+}
+#user_info{
+	float:left;
+}
+
+#user_info h4{
+	font-size:18px;
+	font-weight:normal;
+	margin-left:30px;
+	padding-bottom:10px;
+}
+#user_info h4 strong{
+	font-size:18px;
+	font-weight:normal;
+	margin-left:5px;
+}
+#invite_btn{
+	float:right;
+	color:#FFF;
+	border-radius:3px;
+	padding:10px 30px;
+	background:#f8935e;
+	border:1px #F63 solid;
+}
+#friends_list{
+	padding-top:20px;
+	max-height:345px;
+	border-bottom:none;
+}
+#link_box{
+	padding-top:20px;
+	display:none;
+}
+#tabs{
+	padding-top:20px;
+	z-index:5;
+	height:26px;
+	border-bottom:2px #666 solid;
+	position:relative;
+}
+#tabs ul{
+	position:absolute;
+	bottom:0px;
+	left:10px;
+	z-index:5;
+	height:26px;
+}
+#tabs ul li{
+	float:left;
+	margin:0 4px;
+	height:26px;
+}
+#tabs ul li.active{
+	margin:0 10px;	
+}
+#tabs ul li.active a{
+	color:#666;
+	background:#fcfcfc;
+	border-color:#666;
+	border-bottom:2px #fcfcfc solid;
+	
+}
+#tabs ul li a{
+	display:block;
+	font-size:16px;
+	height:20px;
+	padding:2px 30px;
+	border:2px #999 solid;
+	border-bottom-color:#666;
+	background:#edfdff;
+	border-radius:3px 3px 0 0;
+}
+
+.control_box .read{
+	background-position:-4px -60px;
+}
+
+.control_box .unread{
+	background-position:-4px -16px;
+}
+
+.control_box .del{
+	position:relative;
+	background-position:-48px -16px;
+}
+
+.control_box .fav{
+	background-position:-88px -60px;
+}
+
+.control_box .unfav{
+	background-position:-88px -16px;
+}

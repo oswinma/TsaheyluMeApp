@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="me.tsaheylu.dao.mapper.UserOpenIDMapper">
+
+    <select id="getuser_openidsByToken" resultType="me.tsaheylu.model.UserOpenID">
+      select * from useropenid 
+      where token = #{token}
+    </select>
+
+
+    <select id="getuser_openidsByuser_id" resultType="me.tsaheylu.model.UserOpenID">
+      select * from useropenid 
+      where user_id = #{user_id}
+    </select>
+
+
+    <select id="getuser_openidsByprovider_id" resultType="me.tsaheylu.model.UserOpenID">
+      select * from useropenid 
+      where provider_id = #{provider_id}
+    </select>
+
+
+    <delete id="DetachOpenID" parameterType="java.lang.String">
+		delete from useropenid 
+		where token = #{token}
+		and user_id = #{user_id}
+    </delete>
+
+
+    <delete id="DetachOpenIDsByUser" parameterType="java.lang.Long">
+		delete from useropenid 
+		where user_id = #{user_id}
+    </delete>
+
+    <insert id="AttachOpenID" parameterType="me.tsaheylu.model.UserOpenID" useGeneratedKeys="true"
+            keyProperty="id">
+		insert into useropenid 
+		(token,user_id,provider_id,openid_provider,attachtime,refresh_token,expires_in)
+  		values
+  		(#{token},#{user_id},#{provider_id},#{openid_provider},#{attachtime},#{refresh_token},#{expires_in})
+    </insert>
+
+
+    <select id="Get" resultType="me.tsaheylu.model.UserOpenID">
+      select * from useropenid 
+      where id = #{id}
+    </select>
+
+    <select id="getByUseridProvider" resultType="me.tsaheylu.model.UserOpenID">
+      select * from useropenid
+        where
+        openid_provider = #{provider}
+		and user_id = #{userid}
+
+    </select>
+
+    <insert id="Insert" parameterType="me.tsaheylu.model.UserOpenID" useGeneratedKeys="true" keyProperty="id">
+		insert into useropenid 
+		(token,user_id,provider_id,openid_provider,attachtime,refresh_token,expires_in)
+  		values 
+  		(#{token},#{user_id},#{provider_id},#{openid_provider},#{attachtime},#{refresh_token},#{expires_in})
+    </insert>
+
+    <delete id="Delete" parameterType="me.tsaheylu.model.UserOpenID">
+		delete from useropenid where id=#{id}
+    </delete>
+
+    <update id="Update" parameterType="me.tsaheylu.model.UserOpenID">
+		update useropenid set
+		token = #{token},
+		user_id = #{user_id},
+		provider_id = #{provider_id},
+		openid_provider = #{openid_provider},
+		attachtime = #{attachtime},
+		refresh_token = #{refresh_token},
+		expires_in = #{expires_in}
+		where id=#{id}
+    </update>
+
+</mapper>

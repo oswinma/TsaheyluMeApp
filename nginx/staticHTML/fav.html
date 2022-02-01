@@ -1,0 +1,163 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Favorites - Tsahaylu</title>
+    <link href="css/MyFontsWebfontsKit.css" type="text/css" rel="stylesheet" />
+    <link href="css/base.css" type="text/css" rel="stylesheet" />
+    <link href="css/favurl.css" type="text/css" rel="stylesheet" />
+    <!-- <script src="js/utils/jquery.min.js" type="text/javascript"></script> -->
+    <!-- <script src="js/utils/angular.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js" integrity="sha256-QRJz3b0/ZZC4ilKmBRRjY0MgnVhQ+RR1tpWLYaRRjSo=" crossorigin="anonymous"></script>
+    <script src="js/utils/jquery.timeago.js" type="text/javascript"></script>
+    <script src=js/utils/ng-infinite-scroll.min.js type='text/javascript'></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/services.js" type="text/javascript"></script>
+    <script src="js/archive.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div ng-app="myApp" id="wrap">
+        <div id="header_top">
+            <div id="header_top_inner" ng-controller="headerInfo">
+                <a href="https://tsahaylu.com" target="_blank"> <img class="logo" src="/images/logo.png" /></a>
+                <ul id="main_nav">
+                    <li><a href="/new.html" >New</a></li>
+                    <li><a href="/archive.html">Archive</a></li>
+                    <li class="active"><a href="/fav.html">Favorites</a></li>
+                </ul>
+                <div id="user_zone">
+                    <img class="photo" id="user_avatar" ng-src="{{userservice.user.avatarURL}}"  err-src='../images/mystery-man.jpg'  />
+                    <a class="user_nav" href="#" id="user_nickname" target="_blank">{{userservice.user.nickname}}</a>
+                    <ul id="user_menu">
+                        <li><a href="/basic.html">Setting</a></li>
+                        <li><a href="/tools.html">Tools</a></li>
+                        <li><a href="/help.html">Help</a></li>
+                        <li style="border-bottom:none">
+                            <a href="/api/service/logoff">Sign out</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <a class="mes_num" href="msgs.html" >
+                            <span  id="msg_num">{{messageservice.msgNum}}</span>
+                            <span class="triangle"></span>
+                            <span class="btriangle"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller='link_box'>
+            <div id="header_bottom">
+                <div id="header_bottom_inner">
+                    <input type="text" id="search" ng-change="searchWordChange()" ng-enter="searchFavURL()" ng-model="searchWord" placeholder="Search by title or url" />
+                    <a href="" id="search_clear"  ng-show="searchClearShow" title="clear the search result" ng-click="clearSearchResult()"></a>
+                </div>
+            </div>
+            <div id="main">
+                <div id="main_outer" infinite-scroll="infiniteScroll('fav')" infinite-scroll-disabled='favurlService.busy' infinite-scroll-distance='1'>
+                    <div id="main_inner">
+                        <div id="sel_box">
+                            <input type="checkbox" name="sel_all" id="sel_all" />
+                            <label for="sel_all">Select all</label>
+                            <span class="StandardBtn orange btn" id="all_read" title="Mark all as read">Mark as read</span>
+                            <span class="StandardBtn orange btn" id="all_del" title="Delete all">Delete</span>
+                            <div class="clear"></div>
+                        </div>
+                        <ul id="link_box" sc='favurlService.sc'>
+                            <li ng-cloak ng-repeat="FavURLShow in favurlService.FavURLShows track by $index" data-id="{{FavURLShow.id}}" class="default" ng-if="FavURLShow.show">
+                                <span class="angel_outer"></span>
+                                <span class="angel_inner"></span>
+                                <div class="link_info">
+                                    <div class="user_info">
+                                        <a ng-href="/user/{{FavURLShow.fromid}}" target="_blank">
+                            <img title="Go to user home page" ng-src="{{FavURLShow.avatarURL}}" err-src='../images/mystery-man.jpg'></a>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="unchecked">
+                                    </div>
+                                    <div class="web_info_large" oid="{{FavURLShow.urlid}}">
+                                        <img ng-src="{{FavURLShow.icon}}" err-src="../images/defaulticon.ico">
+                                        <a ng-href="{{FavURLShow.url}}" target="_blank">{{FavURLShow.title}}</a>
+                                    </div>
+                                    <div class="control_box">
+                                        <a  ng-click="favurlService.markFav(FavURLShow, $index)"  title="Toggle favorite" ng-class="{true: 'fav', false: 'unfav'}[FavURLShow.fav]" ></a>
+                                        <a  ng-click="favurlService.showDeleteConfirmBox(FavURLShow)" title="Toggle delete" class="del" ></a>
+                                        <div id="del_box" ng-show="FavURLShow.deleteConfirmBox">
+                                            <em></em><strong>Are you sure?</strong>
+                                            <span ng-click="favurlService.markDelete(FavURLShow)" class="StandardBtn orange delete">Delete</span>
+                                            <span ng-click="favurlService.hideDeleteConfirmBox(FavURLShow)"  class="StandardBtn gray cnl">Cancel</span>
+                                        </div>
+                                        <a href="#" ng-click="favurlService.markRead(FavURLShow)" ng-class="{1: 'unread', 2: 'read'}[FavURLShow.status]"  title="Toggle mark as unread"></a>
+                                    </div>
+                                    <div class="web_info_link">
+                                        <div class="left">From:
+                                            <a ng-href="/user/{{FavURLShow.fromid}}" target="_blank">{{FavURLShow.nickname}}</a>
+                                            | Host: <a ng-href="http://{{FavURLShow.host}}" target="_blank">{{FavURLShow.host}}</a>
+                                        </div>
+                                        <p class="time">{{FavURLShow.sendtime}}</p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <p id="search_link_result" class="ng-hide" ng-show="favurlService.noSearchResult">
+                            No results found<br />
+                            <span href="" ng-click="clearSearchResult()">close</span>
+                        </p>
+                        <div id="end" class="end">
+                            No more links
+                        </div>
+                        <div id="loading" class="loading" class="ng-hide" ng-show="favurlService.busy">
+                            <img src="images/loading.gif">
+                        </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="footer">
+                            <div id="footer_inner">
+                                <ul class="footer_nav">
+                                    <li><a href="/help.html">Help</a></li>
+                                    <li><a href="/contact.html">Contact</a></li>
+                                    <li><a href="/privacy.html">Privacy</a></li>
+                                    <li style="margin-right:0;"><a href="/about.html">About</a></li>
+                                </ul>
+                                <div id="follow_us">
+                                    <a href="https://www.google.com" id="google"  target="_blank"><img src="/images/google.jpg"></a>
+                                    <a href="https://www.facebook.com" id="facebook"  target="_blank"><img src="/images/facebook.png"></a>
+                                    <a href="https://twitter.com" id="twitter"  target="_blank"><img src="/images/twitter.jpg"></a>
+                                </div>
+                                <p class="rights">2019 All Rights Reserverd</p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-nav">
+            <div class="scroll-button top">
+                <div class="tooltip from-left top" id="to_top"> Back to top </div>
+                <div class="tooltip from-left bottom" id="to_where"> Back to where I was </div>
+            </div>
+            <div class="scroll-button bottom">
+                <div class="tooltip from-left bottom"> Back to where I was </div>
+            </div>
+        </div>
+</body>
+<script>
+window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+};
+ga.l = +new Date;
+ga('create', 'UA-37210396-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</html>

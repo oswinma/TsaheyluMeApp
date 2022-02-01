@@ -1,0 +1,261 @@
+/*
+	Paste any of the code below into custom.css
+	Each of the button CSS has been split, so if
+	you don't plan on using certain buttons on your
+	site, you can exclude the additional CSS
+*/
+
+/* Standard Buttons */
+
+.format_text a.standard {
+	border: 1px solid rgba(0, 0, 0, .2);
+	color: #fff;
+	display: inline-block;
+	padding: .5em .8em;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3)
+}
+	.format_text .standard.red {
+		background: #c60000;
+		background: linear-gradient(top, #c60000 0%, #b20000 100%);
+		background: -moz-linear-gradient(top, #c60000 0%, #b20000 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c60000), color-stop(100%, #b20000));
+		background: -webkit-linear-gradient(top, #c60000 0%, #b20000 100%)
+	}
+	.format_text .standard.orange {
+		background: #f99015;
+		background: linear-gradient(top, #f99015 0%, #f76c0f 100%);
+		background: -moz-linear-gradient(top, #f99015 0%, #f76c0f 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f99015), color-stop(100%,#f76c0f));
+		background: -webkit-linear-gradient(top, #f99015 0%,#f76c0f 100%)
+	}
+	.format_text .standard.green {
+		background: #30a146;
+		background: linear-gradient(top, #30a146 0%, #249334 100%);
+		background: -moz-linear-gradient(top, #30a146 0%, #249334 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #30a146), color-stop(100%, #249334));
+		background: -webkit-linear-gradient(top, #30a146 0%, #249334 100%)
+	}
+	.format_text .standard.blue {
+		background: #16a4c8;
+		background: linear-gradient(top, #16a4c8 0%, #1086b6 100%);
+		background: -moz-linear-gradient(top, #16a4c8 0%, #1086b6 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #16a4c8), color-stop(100%, #1086b6));
+		background: -webkit-linear-gradient(top, #16a4c8 0%, #1086b6 100%)
+	}
+	.format_text .standard.gray {
+		background: #c2c2c2;
+		background: linear-gradient(top, #c2c2c2 0%, #aeaeae 100%);
+		background: -moz-linear-gradient(top, #c2c2c2 0%, #aeaeae 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c2c2c2), color-stop(100%, #aeaeae));
+		background: -webkit-linear-gradient(top, #c2c2c2 0%, #aeaeae 100%)
+	}
+	.format_text .standard.dark {
+		background: #464646;
+		background: linear-gradient(top, #464646 0%, #343434 100%);
+		background: -moz-linear-gradient(top, #464646 0%, #343434 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #464646), color-stop(100%, #343434));
+		background: -webkit-linear-gradient(top, #464646 0%, #343434 100%)
+	}
+	.format_text a.standard:hover { color: #fff; opacity: .5 }
+
+
+/* Arrow Buttons */
+
+.format_text a.arrow {
+	background: url(http://i44.tinypic.com/6tmsu8.png) repeat-x top;
+	border: 4px solid rgba(0, 0, 0, .1);
+	color: #fff;
+	display: inline-block;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: .6em 1.2em;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+	a.arrow.red { background-color: #b20000 }
+	a.arrow.orange { background-color: #f76c0f }
+	a.arrow.green { background-color: #248334 }
+	a.arrow.blue { background-color: #1086b6 }
+	a.arrow.gray { background-color: #aeaeae }
+	a.arrow.dark { background-color: #343434 }
+	.format_text a.arrow:hover { color: #fff; opacity: .5 }
+
+
+/* Bevel Buttons */
+
+.format_text a.bevel {
+	border-color: rgba(255, 255, 255, .2) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, .1) rgba(255, 255, 255, 0.2);
+	border-style: solid;
+	border-width: 3px;
+	color: #fff;
+	display: inline-block;
+	padding: .5em .8em;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+}
+	a.bevel.red { background: #b20000 }
+	a.bevel { background: #f76c0f }
+	a.bevel.green { background: #248334 }
+	a.bevel.blue { background: #1086b6 }
+	a.bevel.gray { background: #aeaeae }
+	a.bevel.dark { background: #343434 }
+	.format_text .bevel:hover { color: #fff; opacity: .5 }
+
+
+/* Engraved Buttons */
+
+.engraved {
+	background: rgba(0, 0, 0, .08);
+	display: inline-block;
+	padding: 5px;
+	border-radius: 30px;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px
+}
+	.format_text .engraved a {
+		color: #fff;
+		border: 1px solid rgba(0, 0, 0, .3);
+		display: inline-block;
+		padding: .6em 1.2em;
+		position: relative;
+		text-decoration: none;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+		border-radius: 30px;
+		-moz-border-radius: 30px;
+		-webkit-border-radius: 30px;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4);
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4)
+	}
+		.engraved a.red {
+			background: #c60000;
+			background: linear-gradient(top, #c60000 0%, #b20000 100%);
+			background: -moz-linear-gradient(top, #c60000 0%, #b20000 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c60000), color-stop(100%, #b20000));
+			background: -webkit-linear-gradient(top, #c60000 0%, #b20000 100%)
+		}
+		.engraved a.orange {
+			background: #f99015;
+			background: linear-gradient(top, #f99015 0%, #f76c0f 100%);
+			background: -moz-linear-gradient(top, #f99015 0%, #f76c0f 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f99015), color-stop(100%,#f76c0f));
+			background: -webkit-linear-gradient(top, #f99015 0%,#f76c0f 100%)
+		}
+		.engraved a.green {
+			background: #30a146;
+			background: linear-gradient(top, #30a146 0%, #249334 100%);
+			background: -moz-linear-gradient(top, #30a146 0%, #249334 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #30a146), color-stop(100%, #249334));
+			background: -webkit-linear-gradient(top, #30a146 0%, #249334 100%)
+		}
+		.engraved a.blue {
+			background: #16a4c8;
+			background: linear-gradient(top, #16a4c8 0%, #1086b6 100%);
+			background: -moz-linear-gradient(top, #16a4c8 0%, #1086b6 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #16a4c8), color-stop(100%, #1086b6));
+			background: -webkit-linear-gradient(top, #16a4c8 0%, #1086b6 100%)
+		}
+		.engraved a.gray {
+			background: #c2c2c2;
+			background: linear-gradient(top, #c2c2c2 0%, #aeaeae 100%);
+			background: -moz-linear-gradient(top, #c2c2c2 0%, #aeaeae 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c2c2c2), color-stop(100%, #aeaeae));
+			background: -webkit-linear-gradient(top, #c2c2c2 0%, #aeaeae 100%)
+		}
+		.engraved a.dark {
+			background: #464646;
+			background: linear-gradient(top, #464646 0%, #343434 100%);
+			background: -moz-linear-gradient(top, #464646 0%, #343434 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #464646), color-stop(100%, #343434));
+			background: -webkit-linear-gradient(top, #464646 0%, #343434 100%)
+		}
+	.custom .engraved a:hover, .engraved:hover { color: #fff; opacity: .5 }
+
+
+/* Icon Buttons */
+
+.format_text a.icon {
+	border: 1px solid rgba(0, 0, 0, .2);
+	color: #fff;
+	display: inline-block;
+	padding: .5em 1.2em;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 30px;
+	-moz-border-radius: 30px;
+	-webkit-border-radius: 30px;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3)
+}
+	a.icon.red {
+		background: #c60000;
+		background: linear-gradient(top, #c60000 0%, #b20000 100%);
+		background: -moz-linear-gradient(top, #c60000 0%, #b20000 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c60000), color-stop(100%, #b20000));
+		background: -webkit-linear-gradient(top, #c60000 0%, #b20000 100%)
+	}
+	a.icon.orange {
+		background: #f99015;
+		background: linear-gradient(top, #f99015 0%, #f76c0f 100%);
+		background: -moz-linear-gradient(top, #f99015 0%, #f76c0f 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f99015), color-stop(100%,#f76c0f));
+		background: -webkit-linear-gradient(top, #f99015 0%,#f76c0f 100%)
+	}
+	a.icon.green {
+		background: #30a146;
+		background: linear-gradient(top, #30a146 0%, #249334 100%);
+		background: -moz-linear-gradient(top, #30a146 0%, #249334 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #30a146), color-stop(100%, #249334));
+		background: -webkit-linear-gradient(top, #30a146 0%, #249334 100%)
+	}
+	a.icon.blue {
+		background: #16a4c8;
+		background: linear-gradient(top, #16a4c8 0%, #1086b6 100%);
+		background: -moz-linear-gradient(top, #16a4c8 0%, #1086b6 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #16a4c8), color-stop(100%, #1086b6));
+		background: -webkit-linear-gradient(top, #16a4c8 0%, #1086b6 100%)
+	}
+	a.icon.gray {
+		background: #c2c2c2;
+		background: linear-gradient(top, #c2c2c2 0%, #aeaeae 100%);
+		background: -moz-linear-gradient(top, #c2c2c2 0%, #aeaeae 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c2c2c2), color-stop(100%, #aeaeae));
+		background: -webkit-linear-gradient(top, #c2c2c2 0%, #aeaeae 100%)
+	}
+	a.icon.dark {
+		background: #464646;
+		background: linear-gradient(top, #464646 0%, #343434 100%);
+		background: -moz-linear-gradient(top, #464646 0%, #343434 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #464646), color-stop(100%, #343434));
+		background: -webkit-linear-gradient(top, #464646 0%, #343434 100%)
+	}
+	.icon span { font-family: 'WebSymbolsRegular', cursive; margin-right: 8px }
+	.format_text .icon:hover { color: #fff; opacity: .5 }
+
+
+/* Web Symbolds Typeface */
+
+@font-face {
+    font-family: 'WebSymbolsRegular';
+    font-style: normal;
+    font-weight: normal;
+	src: url('fonts/websymbols-regular-webfont.eot');
+	src: url('fonts/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		url('fonts/websymbols-regular-webfont.woff') format('woff'),
+		url('fonts/websymbols-regular-webfont.ttf') format('truetype'),
+		url('fonts/websymbols-regular-webfont.svg#WebSymbolsRegular') format('svg')
+}

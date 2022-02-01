@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* setting CSS */
+
+#main_nav {
+    float: left;
+    margin-left: 130px;
+    padding-top: 25px;
+}
+
+#main_nav li {
+    float: left;
+    margin-right: 6px;
+}
+
+#main_nav li.active a {
+    background: #608540;
+    color: #fff;
+}
+
+#main_nav li.active a:hover {
+    color: #fff;
+}
+
+#main_nav li a {
+    display: block;
+    font-size: 22px;
+    color: #e46c0a;
+    font-weight: bold;
+    padding: 3px 28px 6px 28px;
+    border-radius: 5px 5px 0 0;
+}
+
+#main_nav li a:hover {
+    color: #fb5724;
+}
+
+#installBtn {
+    left: 48%;
+    position: absolute;
+    margin-top: 10px;
+    width: 80px;
+    height: 20px;
+    font-size: 20px
+}
+
+#main_inner {
+    min-height: 750px;
+    width: 960px;
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+    background: #F7F7F7;
+    border-left: 1px solid #c8c8c8;
+    border-right: 1px solid #c8c8c8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#chrome {
+    width: 400px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+#chrome img {
+    float: left;
+    width: 100px;
+    height: 100px;
+}
+
+#main_inner h2 {
+    font-size: 28px;
+    line-height: 100px;
+    text-align: center;
+}
+
+#main_inner p {
+    text-align: center;
+    font-size: 16px;
+    margin: 20px auto;
+}
+
+#toolimg {
+    text-align: center;
+}
+
+#toolimg img {
+    margin: 0 auto;
+}

@@ -1,0 +1,64 @@
+#headPanel {
+    height: 50px;
+    width: 100%;
+}
+
+#bodyPanel {
+    width: 100%;
+}
+
+#home {
+    padding: 50px 10%;
+    background-color: #002B40;
+    color: #FFC963;
+    min-height: 250px;
+}
+
+#homeLeft {
+    width: 50%;
+    float: left;
+}
+
+#homeLeft>h1 {
+    font-size: 3em;
+    margin-bottom: -25px;
+    color: #FA9E14;
+}
+
+#homeLeft>h3 {
+    font-size: 1.5em;
+    color: #FFF;
+}
+
+#homeLeft>p {
+    margin: 20px 0;
+    color: #FFEFCA;
+}
+
+#homeRight {
+    width: 30%;
+    padding: 5%;
+    float: left;
+}
+
+#homeRight>input {
+    width: 90%;
+    height: 20px;
+    margin: 5px;
+    padding: 2%;
+    
+    border-radius: 5px;
+}
+
+#homeBtn {
+    margin-top: 10px;
+}
+
+#homeSignIn {
+    color: #FFEFCA;
+}
+
+#footPanel {
+    width: 100%;
+    height: 200px;
+}

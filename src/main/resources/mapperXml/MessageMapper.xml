@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="me.tsaheylu.dao.mapper.MessageMapper">
+
+
+    <select id="getMessages" resultType="me.tsaheylu.model.Message">
+      select * from message 
+      where toid = #{toid}
+      and status = 0
+      order by sendtime desc
+      limit #{startCursor},10
+    </select>
+
+
+    <select id="getUnReadMsgNum" resultType="java.lang.Integer">
+      select count(*) from message 
+      where toid = #{toid}
+      and status = 0
+    </select>
+
+
+    <insert id="Insert" parameterType="me.tsaheylu.model.Message" useGeneratedKeys="true" keyProperty="id">
+		insert into message 
+		(fromid,toid,type,status,content,sendtime,readtime,refid)
+  		values 
+  		(#{fromid},#{toid},#{type},#{status},#{content},#{sendtime},#{readtime},#{refid})
+    </insert>
+
+
+    <insert id="batchInsert" keyProperty="id" useGeneratedKeys="true" parameterType="java.util.List">
+        insert into message
+        (fromid,toid,type,status,content,sendtime,readtime,refid)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.fromid},#{item.toid},#{item.type},#{item.status},#{item.content},#{item.sendtime},#{item.readtime},#{item.refid})
+        </foreach>
+    </insert>
+
+    <select id="Get" resultType="me.tsaheylu.model.Message">
+      select * from message 
+      where id = #{id}
+    </select>
+
+
+    <delete id="Delete" parameterType="java.lang.Long">
+		delete from message where id=#{id}
+    </delete>
+
+
+    <update id="Update" parameterType="me.tsaheylu.model.Message">
+		update message set
+		fromid = #{fromid},
+		toid = #{toid},
+		type = #{type},
+		status = #{status},
+		content = #{content},
+		sendtime = #{sendtime},
+		readtime = #{readtime},
+		refid = #{refid}
+		where id=#{id}
+    </update>
+
+    <update id="BatchUpdate" parameterType="list">
+        update message
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="toid =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.toid!=null">
+                        when id=#{i.id} then #{i.toid}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="fromid =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.fromid!=null">
+                        when id=#{i.id} then #{i.fromid}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="type =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.type!=null">
+                        when id=#{i.id} then #{i.type}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="status =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.status!=null">
+                        when id=#{i.id} then #{i.status}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="content =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.content!=null">
+                        when id=#{i.id} then #{i.content}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="sendtime =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.sendtime!=null">
+                        when id=#{i.id} then #{i.sendtime}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="readtime =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.readtime!=null">
+                        when id=#{i.id} then #{i.readtime}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="refid =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.refid!=null">
+                        when id=#{i.id} then #{i.refid}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" separator="," item="i" index="index" open="(" close=")">
+            #{i.id}
+        </foreach>
+    </update>
+
+    <select id="getMessageByRefid" resultType="me.tsaheylu.model.Message">
+      select * from message 
+      where refid = #{refid}
+      and status =0
+    </select>
+
+
+    <select id="getMessageByRefidList" resultType="me.tsaheylu.model.Message">
+
+        select *
+        from
+        message
+        where status = 0
+        and toid = #{toid}
+        and type = #{type}
+        and refid in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
+
+</mapper>

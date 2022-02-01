@@ -1,0 +1,387 @@
+<html>
+
+<head>
+    <title>New - Tsahaylu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="css/MyFontsWebfontsKit.css" type="text/css" rel="stylesheet" />
+    <link href="css/base.css" type="text/css" rel="stylesheet" />
+    <link href="css/favurl.css" type="text/css" rel="stylesheet" />
+    <link href="css/new.css" type="text/css" rel="stylesheet" />
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ikclohelcmmbnecbigakdmmmmpdcaohb" />
+    <!-- <script src="js/utils/jquery.min.js" type="text/javascript"></script> -->
+    <!-- <script src="js/utils/angular.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js" integrity="sha256-QRJz3b0/ZZC4ilKmBRRjY0MgnVhQ+RR1tpWLYaRRjSo=" crossorigin="anonymous"></script>
+    <script src=js/utils/ng-infinite-scroll.min.js type='text/javascript'></script>
+    <script src="js/utils/jquery.timeago.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <script src="js/services.js" type="text/javascript"></script>
+    <!-- <script src="js/listFun.js" type="text/javascript"></script> -->
+    <script src="js/new.js" type="text/javascript"></script>
+</head>
+
+<body ng-app="myApp">
+    <div id="wrap">
+        <div id="header_top">
+            <div id="header_top_inner" ng-controller="headerInfo">
+                <a href="https://tsahaylu.com" target="_blank"> <img class="logo" src="/images/logo.png" /></a>
+                <ul id="main_nav">
+                    <li class="active"><a href="/new.html" >New</a></li>
+                    <li><a href="/archive.html">Archive</a></li>
+                    <li><a href="/fav.html">Favorites</a></li>
+                </ul>
+                <div id="user_zone">
+                    <img class="photo" id="user_avatar" ng-src="{{userservice.user.avatarURL}}"  err-src='../images/mystery-man.jpg'  />
+                    <a class="user_nav" href="#" id="user_nickname" target="_blank">{{userservice.user.nickname}}</a>
+                    <ul id="user_menu">
+                        <li><a href="/basic.html">Setting</a></li>
+                        <li><a href="/tools.html">Tools</a></li>
+                        <li><a href="/help.html">Help</a></li>
+                        <li style="border-bottom:none">
+                            <a href="/api/service/logoff">Sign out</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <a class="mes_num" href="msgs.html" >
+                            <span  id="msg_num">{{messageservice.msgNum}}</span>
+                            <span class="triangle"></span>
+                            <span class="btriangle"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller='link_box'>
+            <div id="header_bottom">
+                <div id="header_bottom_inner">
+                    <div id="globe_tip"> </div>
+                    <input type="text" id="search" ng-change="searchWordChange()" ng-enter="searchFavURL()" ng-model="searchWord" placeholder="Search by title or url" />
+                    <a href="" id="search_clear" ng-show="searchClearShow" title="clear the search result" ng-click="clearSearchResult()"></a>
+                </div>
+            </div>
+            <div id="main">
+                <div id="main_outer" infinite-scroll="infiniteScroll('new')" infinite-scroll-disabled='favurlService.busy' infinite-scroll-distance='1'>
+                    <div id="main_inner">
+                        <div id="sel_box">
+                            <input type="checkbox" name="sel_all" id="sel_all" />
+                            <label for="sel_all">Select all</label>
+                            <span class="StandardBtn orange btn" id="all_read" title="Mark all as read">Mark as read</span>
+                            <span class="StandardBtn orange btn" id="all_del" title="Delete all">Delete</span>
+                            <div class="clear"></div>
+                        </div>
+                        <ul id="link_box" sc='favurlService.sc'>
+                            <li ng-cloak ng-repeat="FavURLShow in favurlService.FavURLShows track by $index" data-id="{{FavURLShow.id}}" class="default" ng-if="FavURLShow.show">
+                                <span class="angel_outer"></span>
+                                <span class="angel_inner"></span>
+                                <div class="link_info">
+                                    <div class="user_info">
+                                        <a ng-href="/user/{{FavURLShow.fromid}}" target="_blank">
+                                            <img title="Go to user home page" ng-src="{{FavURLShow.avatarURL}}" err-src='../images/mystery-man.jpg'>
+                                        </a>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="unchecked">
+                                    </div>
+                                    <div class="web_info_large" oid="{{FavURLShow.urlid}}">
+                                        <img ng-src="{{FavURLShow.icon}}" err-src="../images/defaulticon.ico">
+                                        <a ng-href="{{FavURLShow.url}}" target="_blank">{{FavURLShow.title}}</a>
+                                    </div>
+                                    <div class="control_box">
+                                        <a  ng-click="favurlService.markFav(FavURLShow, $index)"  title="Toggle favorite" ng-class="{true: 'fav', false: 'unfav'}[FavURLShow.fav]" ></a>
+                                        <a  ng-click="favurlService.showDeleteConfirmBox(FavURLShow)" title="Toggle delete" class="del"  ></a>
+                                        <div id="del_box" ng-show="FavURLShow.deleteConfirmBox">
+                                            <em></em><strong>Are you sure?</strong>
+                                            <span ng-click="favurlService.markDelete(FavURLShow)" class="StandardBtn orange delete">Delete</span>
+                                            <span ng-click="favurlService.hideDeleteConfirmBox(FavURLShow)"  class="StandardBtn gray cnl">Cancel</span>
+                                        </div>
+                                        <a href="###" ng-click="favurlService.markRead(FavURLShow)" ng-class="{1: 'unread', 2: 'read'}[FavURLShow.status]" title="Toggle mark as unread"></a>
+                                    </div>
+                                    <div class="web_info_link">
+                                        <div class="left">From:
+                                            <a ng-href="/user/{{FavURLShow.fromid}}" target="_blank">{{FavURLShow.nickname}}</a>
+                                            | Host: <a ng-href="http://{{FavURLShow.host}}" target="_blank">{{FavURLShow.host}}</a>
+                                        </div>
+                                        <p class="time">{{FavURLShow.sendtime}}</p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <p id="search_link_result" class="ng-hide" ng-show="favurlService.noSearchResult">
+                            <br> No results found
+                            <span href="" ng-click="clearSearchResult()">close</span>
+                        </p>
+                        <div id="end" class="end">
+                            No more links
+                        </div>
+                        <div id="loading" class="loading" class="ng-hide" ng-show="favurlService.busy">
+                            <img src="images/loading.gif">
+                        </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="footer">
+                            <div id="footer_inner">
+                                <ul class="footer_nav">
+                                    <li><a href="/help.html">Help</a></li>
+                                    <li><a href="/contact.html">Contact</a></li>
+                                    <li><a href="/privacy.html">Privacy</a></li>
+                                    <li style="margin-right:0;"><a href="/about.html">About</a></li>
+                                </ul>
+                                <div id="follow_us">
+                                    <a href="https://www.google.com" id="google"  target="_blank"><img src="/images/google.jpg"></a>
+                                    <a href="https://www.facebook.com" id="facebook"  target="_blank"><img src="/images/facebook.png"></a>
+                                    <a href="https://twitter.com" id="twitter"  target="_blank"><img src="/images/twitter.jpg"></a>
+                                </div>
+                                <p class="rights">2019 All Rights Reserverd</p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="instroInfo">
+            <div id="manualFrame">
+                <div id="introduction" class="nav">
+                    <div class="manualDivHeader">
+                        <span class="close"></span>
+                        <span id="title">Welcome</span>
+                    </div>
+                    <span id="wel_con">For a quick tour of Tsahaylu's key features, click <span class="key_point">Next</span>.</span>
+                    <div style='float: left; height:60px;width:100%;'>
+                        <div class="clear"></div>
+                    </div>
+                    <span class="StandardBtn gray next" id="next">Next</span>
+                    <div class="clear"></div>
+                </div>
+                <div id="step2" class="nav">
+                    <div class="manualDivHeader">
+                        <span id="title">Install chrome extension</span>
+                        <span class="close"></span>
+                    </div>
+                    <span id="install_con">Chrome extension is a necessary tool for Tsahaylu, click <span class="key_point">Install</span> button to install it.</span>
+                    <div class="chromeInstall">
+                        <img class="chromeLogo" src="../images/chrome.png"></img>
+                        <a href="https://chrome.google.com/webstore/detail/omgmmlnkloflnieeakggojbkpmeebcgl" target="_blank" class="StandardBtn orange install" id="install" title="">Install</a>
+                    </div>
+                    <div style='float: left; height:60px;width:100%;'>
+                        <div class="clear"></div>
+                    </div>
+                    <span class="StandardBtn gray back" id="back" >Back</span>
+                    <span class="StandardBtn gray next" id="next" >Next</span>
+                    <div class="clear"></div>
+                </div>
+                <div id="step3" class="nav">
+                    <div class="manualDivHeader">
+                        <span class="close"></span>
+                        <span id="title">Find your friends</span>
+                    </div>
+                    <div id="findfriends" style='float: left;width: 100%;'>
+                        <span id="fin_con">Find your friends already in Tsahaylu, click<span class="key_point"> Find friends</span> button.</span>
+                        <ul id='findul'>
+                            <li class="providerLine">
+                                <span class="icon"><img src="/images/facebook.png" ></span>
+                                <span class='provider'><b class="providerTitle">Facebook</b></span>
+                                <div id="loading" ng-show="ContactService.showFindFacebookFriendLoading"><img src="images/loading.gif"></div>
+                                    <a ng-click="ContactService.findFriends('facebook')" class="StandardBtn orange find_friend" ng-show="!ContactService.showFindFacebookFriendLoading" provider-id="facebook">Find friends</a>
+                            </li>
+                            <li class="providerLine">
+                                <span class="icon"><img src="/images/twitter.jpg" ></span>
+                                <span  class='provider'><b class="providerTitle">Twitter</b></span>
+                                <div id="loading" ng-show="ContactService.showFindTwitterFriendLoading"><img src="images/loading.gif"></div>
+                                    <a ng-click="ContactService.findFriends('twitter')" class="StandardBtn orange find_friend" ng-show="!ContactService.showFindTwitterFriendLoading" provider-id="twitter" >Find friends</a>
+                            </li>
+                            <li class="providerLine">
+                                <span class="icon"><img src="/images/google.jpg"></span>
+                                <span  class='provider'><b class="providerTitle">Google</b></span>
+                                <div id="loading" ng-show="ContactService.showFindGoogleFriendLoading"><img src="images/loading.gif"></div>
+                                    <a ng-click="ContactService.findFriends('google')" class="StandardBtn orange find_friend" ng-show="!ContactService.showFindGoogleFriendLoading" provider-id="google">Find friends</a>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="resdiv" ng-show="ContactService.showResultDiv" style='float: left;width: 100%;'>
+                        <span class="label" >Result list</span>
+                        <a class="label" ng-click="clearSearchResult()"  id='backfind'>Try other</a>
+                        <p class="label" style="text-align: center;color: #f99015;" id="search_friends_result" ng-show="ContactService.showResult">{{ContactService.resultMsg}}</p>
+                        <ul id="friends_list">
+                            <li ng-repeat="Contact in ContactService.Contacts" ng-if="Contact.show" user-id="{{Contact.id}}" friend-id="{{Contact.friendid}}">
+                                <div id="contactLeftInfo">
+                                    <a >
+                                            <img ng-src="{{Contact.avatarURL}}"  err-src='/images/mystery-man.jpg'>
+                                        </a>
+                                </div>
+                                <div id="contactRightInfo">
+                                    <div title="{{Contact.nickname}}" class="contactListNickname">{{Contact.nickname}}</div>
+                                    <div id="contactEmail" title="{{Contact.email}}" class="contactListEmail" ng-show='Contact.showEmail'>{{Contact.email}}</div>
+                                    <a href="" class="orange invite_btn" ng-click="inviteUser(Contact)" ng-show='Contact.showInviteButton' title="Click 'Invite' button to invite your friends by email" >Invite</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div id="contact_line"></div>
+                    </div>
+                    <span class="StandardBtn gray back" id="back" >Back</span>
+                    <div id="providerTip" class="tip"></div>
+                    <span class="StandardBtn gray next" id="next" >Next</span>
+                    <div class="clear"></div>
+                </div>
+                <div id="invite_friend_box" class="nav">
+                    <div class="manualDivHeader">
+                        <span class="close" ng-click="hideSentEmailInvitationBoxEvent()"></span>
+                        <span id="title">Invite your friends via email</span>
+                    </div>
+                    <form name="emailForm">
+                        <div class="input_box">
+                            <label>Friend's Name:</label>
+                            <label>Friend's Email Address:</label>
+                            <div class="clear"></div>
+                        </div>
+                        <div id="invite_box_line" ng-repeat="EmailLine in EmailLines">
+                            <div class="input_box">
+                                <input class="nickname" name="nickname" ng-model="EmailLine.nickname" placeholder="please input nickname{{$index + 1}}" required>
+                                <div class="alert nicknameAlert" role="alert">
+                                    <span class="error" ng-show="EmailLine.invalidNickname">Required!</span>
+                                </div>
+                                <input class="email" name="email" ng-EmailCheck="" ng-model="EmailLine.email" placeholder="please input email{{$index + 1}}" required>
+                                <a href="#" ng-click="deleteLineRow($index)" class="delete_row" title="Delete this row" ><img src="/images/delete_row.jpg" ></a>
+                                <div class="alert emailAlert" role="alert">
+                                    <span class="error" ng-show="EmailLine.invalidEmail">Not valid email!</span>
+                                    <span class="error" ng-show="EmailLine.isExsitedEmail">The email have been regeistered already!</span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <input type="button" ng-click="addLineRow()" id="add_row" class="StandardBtn orange" title="Add a row" value="Add Row" />
+                        <input type="button" id="send" ng-click="SentEmailInvitationEvent()" class="StandardBtn orange" title="Send invitation to above email address" value="Invite" />
+                        <div class="clear"></div>
+                    </form>
+                    <span class="StandardBtn gray back" id="back" >Back</span>
+                    <div id="feedbakTip" class="tip"></div>
+                    <span class="StandardBtn gray next" id="next" >Next</span>
+                    <div class="clear"></div>
+                </div>
+                <div id="sendTestDiv" class="nav">
+                    <div class="manualDivHeader">
+                        <span class="close"></span>
+                        <span id="title">Send test link</span>
+                    </div>
+                    <div>
+                        <div>
+                            <p class="sendTestRow">
+                                <span >Step 1: Make sure you have installed the Tsahaylu Chrome extension</span>
+                                <button class="StandardBtn orange divRight" ng-show="extensionCheckBtnShow" autofocus="" ng-click="checkExtension()" id="">Check</button>
+                            </p>
+                            <p class="sendTestResultRow">
+                                <span class="testDivResult" ng-show="extensionCheckResultShow" id="" >{{extensionCheckStatus}}</span>
+                                <a ng-show="installBtnShow" href="https://chrome.google.com/webstore/detail/ikclohelcmmbnecbigakdmmmmpdcaohb" target="_blank" class="StandardBtn orange install" id="install" title="">Install Extension</a>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="sendTestRow"><span >Step 2: Make sure "Unblock" and "Popup" switch is opened</span></p>
+                            <div id="tsahayluTeamInfo">
+                                <div class="contactInfoLeft">
+                                    <a>
+                                        <img class="contactAvatar" ng-src="{{ContactService.tsahayluTeam.avatarURL}}"  err-src='/images/mystery-man-50.jpg'>
+                                    </a>
+                                </div>
+                                <div class="contactInfoMiddle">
+                                    <span class="contactNickname">{{ContactService.tsahayluTeam.nickname}}</span>
+                                </div>
+                                <div class="contactInfoRight">
+                                    <a ng-class="{false: 'block', true: 'unblock'}[ContactService.tsahayluTeam.status ==1]" ng-click="ContactService.blockFriend(ContactService.tsahayluTeam)" ng-attr-title="{{ContactService.tsahayluTeam.status==1 ? 'you and this friend can send link to each other' : 'you can send link to this friend, but link sent from this friend is blocked'}}">
+                                    </a>
+                                    <a ng-class="{true: 'popup', false: 'unpopup'}[ContactService.tsahayluTeam.popup]" ng-click="ContactService.updateFriendPopup(ContactService.tsahayluTeam)" ng-attr-title="{{ContactService.tsahayluTeam.popup ? 'browser will create a tab when this friend send a link to you' : 'link will be put in new list when this friend send a link to you'}}">
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="tsahayluTeamInfoStatusDiv">
+                                <span class="tsahayluTeamInfoStatus"  id="" >Unblock status: 
+                                    <span style="color: #ff9000; font-size: 18px;" ng-bind="{false: 'close', true: 'open'}[ContactService.tsahayluTeam.status ==1]"></span>
+                                </span>
+                                <span  class="tsahayluTeamInfoStatus"  id="" >Popup status: 
+                                    <span style="color: #ff9000; font-size: 18px;" ng-bind="{true: 'open', false: 'close'}[ContactService.tsahayluTeam.popup]"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="sendTestRow">
+                                <span >Step 3: Have a try to recieve a random link from Tsahaylu Team</span>
+                                <button class="StandardBtn orange divRight" id="" ng-show="extensionCheckStatus=='Installed'" ng-click="tryRecieve()">Try</button>
+                            </p>
+                            <p class="sendTestResultRow">
+                                <span class="testDivResult" ng-show="recieveResultShow" id="" >{{recieveStatus}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="sendTestRow">
+                                <span >Step 4: Have a try to send current page to yourself</span>
+                                <button class="StandardBtn orange divRight" id="" ng-show="extensionCheckStatus=='Installed'" ng-click="trySend()">Try</button>
+                            </p>
+                            <p class="sendTestResultRow">
+                                <span class="testDivResult" ng-show="sendResultShow" id="" >{{sendStatus}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="manualDivFooter">
+                        <span class="StandardBtn gray back" id="back" >Back</span>
+                        <div id="feedbakTip" class="tip"></div>
+                        <span class="StandardBtn gray next" id="next" >Next</span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="intro_fin" class="nav">
+                    <div class="manualDivHeader">
+                        <span class="close"></span>
+                        <span id="title">Finished</span>
+                    </div>
+                    <span id="wel_con">Tour finished, join your journey in Tsahaylu!</span>
+                    <div style='float: left; height:60px;width:100%;'>
+                        <div class="clear"></div>
+                    </div>
+                    <span class="StandardBtn gray back" id="back">Back</span>
+                    <span class="StandardBtn gray next" id="next">Done</span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div id="feedbackFrame" class="screenCenter">
+                <div id="feedbackBox">
+                    <span >If you have any questions or suggestions about our website, please write down your thoughts and click "submit" button to send. We will read your questions and suggestions, give you our feedback ASAP! Thanks for your help to improve Tsahaylu.com! </span>
+                    <textarea name="des" rows="7" ng-model="feedbackText" placeholder="please write here"></textarea>
+                    <div id="buttonDiv">
+                        <a href="" id="submit" ng-click="submitFeedback()" class="StandardBtn orange">Submit</a>
+                        <a href="" id="cancel" class="StandardBtn gray">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="overlay"></div>
+        <div class="left_tool">
+            <div class="button" id="feedback">Feedback</div>
+            <div class="button" id='manual'>Manual</div>
+        </div>
+        <div class="scroll-nav">
+            <div class="scroll-button top">
+                <div class="tooltip from-left top" id="to_top"> Back to top </div>
+                <div class="tooltip from-left bottom" id="to_where"> Back to where I was </div>
+            </div>
+            <div class="scroll-button bottom">
+                <div class="tooltip from-left bottom"> Back to where I was </div>
+            </div>
+        </div>
+</body>
+<script>
+window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+};
+ga.l = +new Date;
+ga('create', 'UA-37210396-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</html>

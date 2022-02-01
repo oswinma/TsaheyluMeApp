@@ -1,0 +1,201 @@
+body {
+    background-color: #FFF6E5;
+    font-family: 'Raleway', Arial;
+    color: #3E454C;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: #FF7F66;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    margin: 0;
+    font-size: 0.9em !important;
+    padding: 5px 10px;
+}
+
+.grayButton {
+    background: #FFF !important;
+    color: #666 !important;
+    border: 1px solid #CCC !important;
+}
+
+.grayButton:hover {
+    color: #666 !important;
+    border: 1px solid #999 !important;
+}
+
+#header {
+    width: 100%;
+    height: 40px;
+    background-color: #FF7F66;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    opacity: 0.5;
+    transition-duration: 0.4s;
+}
+
+#headerBack {
+    background-color: #FF7F66;
+    height: 40px;
+    width: 100%;
+}
+
+#header:hover {
+    opacity: 1.0;
+}
+
+#basicPanel {
+    background-color: #3E454C;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    height: 60px;
+}
+
+#basicContainer>a>img {
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin: 0 20px;
+    border-radius: 50%;
+    border: dashed 3px #FF7F66;
+}
+
+#category {
+    display: inline-block;
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+}
+
+.category {
+    min-width: 80px;
+    display: inline-block;
+    color: #FF7F66;
+    padding: 0px 20px;
+}
+
+.category>a {
+    display: block;
+    font-size: 2em;
+    color: #FF7F66;
+}
+
+.category.selected {
+    background-color: #FFF6E5;
+    padding-bottom: 20px;
+    color: #2185C5;
+}
+
+.category.selected>a {
+    color: #2185C5;
+}
+
+.container {
+    width: 100%;
+    position: relative;
+}
+
+.container>div {
+    width: 250px;
+    position: absolute;
+    padding: 24px;
+    
+    background-color: #FFF;
+    border: 1px solid #7ECEFD;
+    transition-duration: 0.2s;
+}
+
+.container>div:hover {
+    box-shadow: 3px 3px 0 #FF7F66;
+    border: 1px solid #FF7F66;
+}
+
+.pinTag {
+    background-color: #7ECEFD;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    display: inline;
+    position: relative;
+    left: -25px;
+    top: -10px;
+    z-index: 10;
+    transition-duration: 0.2s;
+}
+
+.container>div:hover>.pinTag {
+    background-color: #FF7F66;
+}
+
+.pinImage {
+    margin: -43px 0 10px -24px;
+}
+
+.pinImage>img {
+    width: 298px;
+    display: inline-block;
+}
+
+.pinTitle {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+}
+
+.container a {
+    color: #2185C5;
+}
+
+.container>div:hover a {
+    color: #FF7F66;
+}
+
+.pinCtrl {
+    margin-top: 10px;
+}
+
+.pinCtrl a>img {
+    width: 16px;
+    height: 16px;
+}
+
+.addCmtInput {
+    width: 240px;
+    padding: 5px;
+    border: 1px solid #CCC;
+}
+
+.container>div:hover .addCmtInput {
+    border: 1px solid #FF7F66;
+}
+
+.pinCmtBtn {
+    margin: 5px 0;
+    display: none;
+}
+
+#footer {
+    color: #FFF;
+    background-color: #2185C5;
+    margin-top: 50px;
+}
+
+#footerLink {
+    width: 80%;
+    margin: 0 auto;
+    padding: 25px 0 50px 0;
+}
+
+#footerLink>a {
+    width: 100px;
+    display: inline-block;
+    color: #FFF;
+}
