@@ -10,7 +10,8 @@
             <dataSource type="POOLED">
 
                 <property name="driver" value="org.mariadb.jdbc.Driver"/>
-                <property name="url" value="jdbc:mariadb://127.0.0.1:3306/tsahaylu_com?useUnicode=true&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;characterEncoding=utf-8"/>
+                <property name="url"
+                          value="jdbc:mariadb://127.0.0.1:3306/tsahaylu_com?useUnicode=true&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;characterEncoding=utf-8"/>
                 <property name="username" value="root"/>
                 <property name="password" value="admin)"/>
                 <property name="poolPingEnabled" value="true"/>
@@ -20,14 +21,15 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com/tsahaylu/www/dao/mapper/UserMapper.xml"/>
-        <mapper resource="com/tsahaylu/www/dao/mapper/CommentMapper.xml"/>
-        <mapper resource="com/tsahaylu/www/dao/mapper/FriendMapper.xml"/>
-        <mapper resource="com/tsahaylu/www/dao/mapper/FavURLMapper.xml"/>
-        <mapper resource="com/tsahaylu/www/dao/mapper/GroupMapper.xml"/>
-        <mapper resource="com/tsahaylu/www/dao/mapper/MessageMapper.xml"/>
-        <mapper resource="com/tsahaylu/www/dao/mapper/URLInfoMapper.xml"/>
-        <mapper resource="com/tsahaylu/www/dao/mapper/UserOpenIDMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/UserDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/CommentDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/FriendDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/FavURLDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/GroupDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/MessageDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/URLInfoDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/UserOpenIDDaoMapper.xml"/>
+        <mapper resource="com/tsahaylu/www/dao/mapper/FavURLDtoDaoMapper.xml"/>
 
     </mappers>
 </configuration>

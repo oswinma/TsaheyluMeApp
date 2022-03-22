@@ -16,14 +16,14 @@ import java.util.Date;
 public class Friend {
 
 
-//  @Id
+    //  @Id
 //  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    private Long id;
 
-  private Long fromid;
-  private Long toid;
-  private int status = FriendStatus.INVALID;
-  private boolean popup = true;
-  private Date bondtime;
+    private Long fromid;
+    private Long toid;
+    private int status = FriendStatus.INVALID.getId();
+    private boolean popup = true;
+    private Date bondtime;
 
 }

@@ -5,12 +5,24 @@ package me.tsaheylu.service;
 //import com.github.scribejava.core.oauth.OAuth10aService;
 //import com.github.scribejava.core.oauth.OAuth20Service;
 
+import me.tsaheylu.model.Friend;
+
 import java.util.Map;
 
 public interface FriendService {
     boolean hasAvaliableFriends(Long id);
 
     Map<String, Object> getTsahayluTeamInfo(Long id);
+
+    Friend save(Friend friend);
+
+    void delete(Long id);
+
+    Friend get(Long id);
+
+    Friend update(Friend friend);
+
+    Friend invite(Friend friend);
 
 //  public abstract HashMap<String, Object> getGoogleFriendsList(
 //      Long fromid, OAuth20Service gservice, OAuth2AccessToken accessToken);

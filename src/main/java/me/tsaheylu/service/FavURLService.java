@@ -17,14 +17,21 @@ public interface FavURLService {
 //
 //  Map<String, Object> getPendingFavurls(Long userids);
 
-  HashMap<String, Object> getFavurlsByStatus(Long toids, String startCursor, int status);
+    HashMap<String, Object> getFavurlsByStatus(Long toids, String startCursor, int status);
 
-  FavURL getArchive(Long valueOf);
+    FavURL getArchive(Long valueOf);
 
-  FavURL getNew(Long toid);
+    FavURL getNew(Long toid);
 
-  HashMap<String, Object> getFav(Long id, String startCursor);
+    HashMap<String, Object> getFav(Long id, String startCursor);
 
-  boolean batchUpdateFavurlStatus(List<FavURL> json);
+    boolean batchUpdateFavurlStatus(List<FavURL> json);
 
+    FavURL save(FavURL favURL);
+
+    FavURL update(FavURL favURL);
+
+    FavURL get(Long id);
+
+    void delete(Long id);
 }

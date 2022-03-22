@@ -2,7 +2,7 @@ package me.tsaheylu.service.impl;
 
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
-import me.tsaheylu.dao.mapper.UserMapper;
+import me.tsaheylu.dao.mapper.UserDaoMapper;
 import me.tsaheylu.model.User;
 import me.tsaheylu.service.UserService;
 import me.tsaheylu.util.CommonUtils;
@@ -18,14 +18,14 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
 
-  @Autowired private UserMapper userMapper;
+  @Autowired private UserDaoMapper userDaoMapper;
   //  @Autowired private JwtTokenComponent jwtTokenComponent;
   //  @Autowired private AuthenticationManager authenticationManager;
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-    User user = userMapper.getUserByEmail(email);
+    User user = userDaoMapper.getUserByEmail(email);
 
     return user;
   }
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     String id = null;
     String token = null;
 
-    User u = userMapper.getUserByEmail(emails);
+    User u = userDaoMapper.getUserByEmail(emails);
     if (u == null) {
       pass = Constants.RETURN_FAILUTE;
       msg = Texts.MESSAGE_ERROR_EMAILINVALID;
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
     String msg = null;
 
     if (CommonUtils.checkEmailFormat(email)) {
-      User u = userMapper.getUserByEmail(email);
+      User u = userDaoMapper.getUserByEmail(email);
       if (u == null) {
         pass = Constants.RETURN_SUCCESS;
         msg = Texts.MESSAGE_PASS_VALIDATE;

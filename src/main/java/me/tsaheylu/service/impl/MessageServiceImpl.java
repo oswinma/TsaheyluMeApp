@@ -1,6 +1,6 @@
 package me.tsaheylu.service.impl;
 
-import me.tsaheylu.dao.mapper.MessageMapper;
+import me.tsaheylu.dao.mapper.MessageDaoMapper;
 import me.tsaheylu.model.User;
 import me.tsaheylu.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-  @Autowired private MessageMapper messageMapper;
+  @Autowired private MessageDaoMapper messageMapper;
 
   @Override
   public Integer getUnreadNum() {
