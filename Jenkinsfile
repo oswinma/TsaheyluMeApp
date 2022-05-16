@@ -9,7 +9,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        sh 'bootRun'
+        sh './gradlew bootRun'
       }
     }
 
