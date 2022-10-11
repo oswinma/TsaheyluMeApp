@@ -2,3 +2,4 @@
 /mariadb/data/
 /build/
 /build
+/.gradle/
