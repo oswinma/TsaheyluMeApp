@@ -5,3 +5,5 @@
 /.gradle/
 /gradle/
 /newrelic/logs/
+/mariadb/sql/
+/nginx/ssl/
