@@ -8,18 +8,18 @@ services:
       - 5005:5005
     depends_on:
       - maria_db
-      - nginx
+#      - nginx
     command: sh -c './wait-for mysql_db:3306 -- npm start'
-  nginx:
-    container_name: nginx-server
-    build: ./nginx
-#    image: nginx
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    labels:
-      - sh.acme.autoload.domain=tsaheylu.me
+#  nginx:
+#    container_name: nginx-server
+#    build: ./nginx
+##    image: nginx
+#    restart: always
+#    ports:
+#      - 80:80
+#      - 443:443
+#    labels:
+#      - sh.acme.autoload.domain=tsaheylu.me
 #    volumes:
 #      - ./staticHTML:/usr/share/nginx/static
 #      - ./nginx/conf.d:/etc/nginx/conf.d
@@ -28,10 +28,10 @@ services:
 #      - api_service
   maria_db:
     build: ./mariadb
-#    volumes:
-#      - ./mariadb/data:/var/lib/mysql
-#      - ./mariadb/init:/docker-entrypoint-initdb.d/
-#      - ./mariadb/sql:/opt/sql
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/init:/docker-entrypoint-initdb.d/
+      - ./mariadb/sql:/opt/sql
     container_name: 'mariadb-server'
     restart: always
     ports:

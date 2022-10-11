@@ -55,4 +55,6 @@ public interface FavURLDaoMapper {
     List<ContactDTO> getShareUserListByUrlid(@Param("urlid") Long urlid);
 
     List<ContactDTO> getFavUserListByUrlid(@Param("urlid") Long urlid);
+
+
 }

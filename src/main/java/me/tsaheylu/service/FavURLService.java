@@ -1,5 +1,6 @@
 package me.tsaheylu.service;
 
+import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.model.FavURL;
 
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public interface FavURLService {
 
     FavURL save(FavURL favURL);
 
-    FavURL update(FavURL favURL);
+    FavURLDTO update(FavURLDTO favURLDTO);
 
     FavURL get(Long id);
 

@@ -1,5 +1,6 @@
 package me.tsaheylu.service.impl;
 
+import io.sentry.spring.tracing.SentrySpan;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
 import me.tsaheylu.dao.mapper.UserDaoMapper;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
   //  @Autowired private AuthenticationManager authenticationManager;
 
   @Override
+  @SentrySpan
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
     User user = userDaoMapper.getUserByEmail(email);

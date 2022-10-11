@@ -1,0 +1,208 @@
+2022-09-30T21:44:18,886-0400 [8384 1] com.newrelic INFO: Writing to New Relic log file: F:\Workspace\TsaheyluMeApp\newrelic\logs\newrelic_agent.log
+2022-09-30T21:44:18,887-0400 [8384 1] com.newrelic INFO: JRE vendor Oracle Corporation version 1.8.0_333
+2022-09-30T21:44:18,887-0400 [8384 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 25.333-b02
+2022-09-30T21:44:18,887-0400 [8384 1] com.newrelic INFO: OS Windows 10 version 10.0 arch amd64
+2022-09-30T21:44:18,887-0400 [8384 1] com.newrelic INFO: Agent Host: Oswinsdream IP: 169.254.83.107
+2022-09-30T21:44:18,887-0400 [8384 1] com.newrelic INFO: New Relic Agent v7.10.0 is initializing...
+2022-09-30T21:44:19,974-0400 [8384 14] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2022-09-30T21:44:31,462-0400 [8384 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2022-09-30T21:44:32,693-0400 [8384 1] com.newrelic INFO: Setting audit_mode to false
+2022-09-30T21:44:32,950-0400 [8384 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is F:\Workspace\TsaheyluMeApp\newrelic\.\newrelic.yml
+2022-09-30T21:44:32,966-0400 [8384 1] com.newrelic INFO: New Relic Agent v7.10.0 has started
+2022-09-30T21:44:32,967-0400 [8384 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@1963006a
+2022-09-30T21:44:32,967-0400 [8384 1] com.newrelic INFO: Premain startup complete in 15,505ms
+2022-09-30T21:44:35,346-0400 [8384 1] com.newrelic INFO: Server Info: Apache Tomcat/9.0.55
+2022-09-30T21:44:47,993-0400 [8384 32] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-09-30T21:44:47,997-0400 [8384 32] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-09-30T21:44:50,161-0400 [8384 32] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-09-30T21:44:51,374-0400 [8384 32] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-09-30T21:44:51,375-0400 [8384 32] com.newrelic INFO: Agent run id: BfeMD5OFgv4SADeO7jeaAOZjN5vYAAIBAAAnIQEAACDAAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQAOTXkgQXBwbGljYXRpb24
+2022-09-30T21:44:51,375-0400 [8384 32] com.newrelic INFO: Agent 8384@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-09-30T21:44:51,375-0400 [8384 32] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-09-30T21:44:51,383-0400 [8384 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-09-30T21:44:51,383-0400 [8384 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-09-30T21:44:51,383-0400 [8384 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-09-30T21:44:51,434-0400 [8384 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-09-30T21:44:51,434-0400 [8384 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-09-30T21:44:51,435-0400 [8384 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-09-30T21:44:52,215-0400 [8384 32] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-09-30T21:44:52,216-0400 [8384 32] com.newrelic WARN: Not starting JFR Service. Core JFR APIs do not exist in this JVM.
+2022-09-30T22:06:21,951-0400 [8384 166] com.newrelic INFO: Remote metric_data call failed : com.newrelic.agent.ForceRestartException: .
+2022-09-30T22:06:21,952-0400 [8384 166] com.newrelic WARN: Received a ForceRestartException: com.newrelic.agent.ForceRestartException: . The agent will attempt to reconnect for data reporting. If this message continues, please contact support via https://support.newrelic.com/.
+2022-09-30T22:06:22,328-0400 [8384 166] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-09-30T22:06:22,331-0400 [8384 166] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-09-30T22:06:22,967-0400 [8384 166] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-09-30T22:06:23,904-0400 [8384 166] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-09-30T22:06:23,904-0400 [8384 166] com.newrelic INFO: Agent run id: BUY9WzO2gWZRADeO7jeaAOZjN6EAAAIBAAAnIQEAACDAAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQAOTXkgQXBwbGljYXRpb24
+2022-09-30T22:06:23,904-0400 [8384 166] com.newrelic INFO: Agent 8384@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-09-30T22:06:23,905-0400 [8384 166] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-09-30T22:06:23,907-0400 [8384 166] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-09-30T22:06:23,908-0400 [8384 166] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-09-30T22:06:23,908-0400 [8384 166] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-09-30T22:06:23,953-0400 [8384 166] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-09-30T22:06:23,954-0400 [8384 166] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-09-30T22:06:23,954-0400 [8384 166] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-09-30T22:06:24,000-0400 [8384 166] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-09-30T23:55:21,917-0400 [8384 166] com.newrelic INFO: Remote metric_data call failed : com.newrelic.agent.ForceRestartException: .
+2022-09-30T23:55:21,917-0400 [8384 166] com.newrelic WARN: Received a ForceRestartException: com.newrelic.agent.ForceRestartException: . The agent will attempt to reconnect for data reporting. If this message continues, please contact support via https://support.newrelic.com/.
+2022-09-30T23:55:22,067-0400 [8384 166] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-09-30T23:55:22,070-0400 [8384 166] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-09-30T23:55:22,793-0400 [8384 166] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-09-30T23:55:23,514-0400 [8384 166] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-09-30T23:55:23,514-0400 [8384 166] com.newrelic INFO: Agent run id: BRO3VAmWzaLwADeO7jeaAOZjN7qMAAIBAAAnIQEAACDAAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQANdHNhaGV5bHVtZWFwcA
+2022-09-30T23:55:23,515-0400 [8384 166] com.newrelic INFO: Agent 8384@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-09-30T23:55:23,515-0400 [8384 166] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-09-30T23:55:23,518-0400 [8384 166] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-09-30T23:55:23,518-0400 [8384 166] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-09-30T23:55:23,518-0400 [8384 166] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-09-30T23:55:23,564-0400 [8384 166] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-09-30T23:55:23,564-0400 [8384 166] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-09-30T23:55:23,565-0400 [8384 166] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-09-30T23:55:23,612-0400 [8384 166] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-10-01T20:53:56,049-0400 [8384 167] com.newrelic INFO: Remote log_event_data call failed : java.net.UnknownHostException: collector-003.newrelic.com.
+2022-10-02T21:04:14,361-0400 [8384 167] com.newrelic INFO: A socket exception was encountered while sending data to New Relic (java.net.SocketException: Connection reset). Please check your network / proxy settings.
+2022-10-09T20:52:26,970-0400 [11996 1] com.newrelic INFO: Writing to New Relic log file: F:\Workspace\TsaheyluMeApp\newrelic\logs\newrelic_agent.log
+2022-10-09T20:52:26,970-0400 [11996 1] com.newrelic INFO: JRE vendor Oracle Corporation version 1.8.0_333
+2022-10-09T20:52:26,970-0400 [11996 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 25.333-b02
+2022-10-09T20:52:26,970-0400 [11996 1] com.newrelic INFO: OS Windows 10 version 10.0 arch amd64
+2022-10-09T20:52:26,970-0400 [11996 1] com.newrelic INFO: Agent Host: Oswinsdream IP: 169.254.83.107
+2022-10-09T20:52:26,970-0400 [11996 1] com.newrelic INFO: New Relic Agent v7.10.0 is initializing...
+2022-10-09T20:52:27,592-0400 [11996 14] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2022-10-09T20:52:38,901-0400 [11996 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2022-10-09T20:52:40,132-0400 [11996 1] com.newrelic INFO: Setting audit_mode to false
+2022-10-09T20:52:40,401-0400 [11996 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is F:\Workspace\TsaheyluMeApp\newrelic\.\newrelic.yml
+2022-10-09T20:52:40,419-0400 [11996 1] com.newrelic INFO: New Relic Agent v7.10.0 has started
+2022-10-09T20:52:40,420-0400 [11996 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@1963006a
+2022-10-09T20:52:40,420-0400 [11996 1] com.newrelic INFO: Premain startup complete in 14,670ms
+2022-10-09T20:52:42,671-0400 [11996 1] com.newrelic INFO: Server Info: Apache Tomcat/9.0.55
+2022-10-09T20:52:55,450-0400 [11996 32] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-10-09T20:52:55,453-0400 [11996 32] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-10-09T20:52:57,757-0400 [11996 32] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-10-09T20:52:58,738-0400 [11996 32] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-10-09T20:52:58,738-0400 [11996 32] com.newrelic INFO: Agent run id: BSs7JOXCfM9XADeO7jeaAOZjQ20oAAIBAAAnIQEAAC7cAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQANdHNhaGV5bHVtZWFwcA
+2022-10-09T20:52:58,738-0400 [11996 32] com.newrelic INFO: Agent 11996@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-10-09T20:52:58,739-0400 [11996 32] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-10-09T20:52:58,746-0400 [11996 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-09T20:52:58,746-0400 [11996 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-09T20:52:58,747-0400 [11996 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-09T20:52:58,793-0400 [11996 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-09T20:52:58,793-0400 [11996 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-09T20:52:58,794-0400 [11996 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-09T20:52:59,236-0400 [11996 32] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-10-09T20:52:59,328-0400 [11996 32] com.newrelic WARN: Not starting JFR Service. Core JFR APIs do not exist in this JVM.
+2022-10-09T20:55:47,434-0400 [9500 1] com.newrelic INFO: Writing to New Relic log file: F:\Workspace\TsaheyluMeApp\newrelic\logs\newrelic_agent.log
+2022-10-09T20:55:47,434-0400 [9500 1] com.newrelic INFO: JRE vendor Oracle Corporation version 1.8.0_333
+2022-10-09T20:55:47,434-0400 [9500 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 25.333-b02
+2022-10-09T20:55:47,434-0400 [9500 1] com.newrelic INFO: OS Windows 10 version 10.0 arch amd64
+2022-10-09T20:55:47,434-0400 [9500 1] com.newrelic INFO: Agent Host: Oswinsdream IP: 169.254.83.107
+2022-10-09T20:55:47,434-0400 [9500 1] com.newrelic INFO: New Relic Agent v7.10.0 is initializing...
+2022-10-09T20:55:47,887-0400 [9500 14] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2022-10-09T20:55:58,834-0400 [9500 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2022-10-09T20:55:59,936-0400 [9500 1] com.newrelic INFO: Setting audit_mode to false
+2022-10-09T20:56:00,182-0400 [9500 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is F:\Workspace\TsaheyluMeApp\newrelic\.\newrelic.yml
+2022-10-09T20:56:00,196-0400 [9500 1] com.newrelic INFO: New Relic Agent v7.10.0 has started
+2022-10-09T20:56:00,197-0400 [9500 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@1963006a
+2022-10-09T20:56:00,197-0400 [9500 1] com.newrelic INFO: Premain startup complete in 13,519ms
+2022-10-09T20:56:01,968-0400 [9500 1] com.newrelic INFO: Server Info: Apache Tomcat/9.0.55
+2022-10-09T20:56:15,213-0400 [9500 32] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-10-09T20:56:15,216-0400 [9500 32] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-10-09T20:56:17,392-0400 [9500 32] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-10-09T20:56:18,061-0400 [9500 32] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-10-09T20:56:18,061-0400 [9500 32] com.newrelic INFO: Agent run id: BaUcuonYmJe6ADeO7jeaAOZjQ24YAAIBAAAnIQEAACUcAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQANdHNhaGV5bHVtZWFwcA
+2022-10-09T20:56:18,061-0400 [9500 32] com.newrelic INFO: Agent 9500@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-10-09T20:56:18,061-0400 [9500 32] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-10-09T20:56:18,069-0400 [9500 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-09T20:56:18,069-0400 [9500 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-09T20:56:18,069-0400 [9500 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-09T20:56:18,113-0400 [9500 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-09T20:56:18,113-0400 [9500 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-09T20:56:18,114-0400 [9500 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-09T20:56:19,416-0400 [9500 32] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-10-09T20:56:19,417-0400 [9500 32] com.newrelic WARN: Not starting JFR Service. Core JFR APIs do not exist in this JVM.
+2022-10-09T23:08:51,836-0400 [1632 1] com.newrelic INFO: Writing to New Relic log file: F:\Workspace\TsaheyluMeApp\newrelic\logs\newrelic_agent.log
+2022-10-09T23:08:51,836-0400 [1632 1] com.newrelic INFO: JRE vendor Oracle Corporation version 1.8.0_333
+2022-10-09T23:08:51,836-0400 [1632 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 25.333-b02
+2022-10-09T23:08:51,836-0400 [1632 1] com.newrelic INFO: OS Windows 10 version 10.0 arch amd64
+2022-10-09T23:08:51,836-0400 [1632 1] com.newrelic INFO: Agent Host: Oswinsdream IP: 169.254.83.107
+2022-10-09T23:08:51,836-0400 [1632 1] com.newrelic INFO: New Relic Agent v7.10.0 is initializing...
+2022-10-09T23:08:52,299-0400 [1632 14] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2022-10-09T23:09:03,330-0400 [1632 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2022-10-09T23:09:04,429-0400 [1632 1] com.newrelic INFO: Setting audit_mode to false
+2022-10-09T23:09:04,674-0400 [1632 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is F:\Workspace\TsaheyluMeApp\newrelic\.\newrelic.yml
+2022-10-09T23:09:04,689-0400 [1632 1] com.newrelic INFO: New Relic Agent v7.10.0 has started
+2022-10-09T23:09:04,689-0400 [1632 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@1963006a
+2022-10-09T23:09:04,690-0400 [1632 1] com.newrelic INFO: Premain startup complete in 13,766ms
+2022-10-09T23:09:06,492-0400 [1632 1] com.newrelic INFO: Server Info: Apache Tomcat/9.0.55
+2022-10-09T23:09:19,720-0400 [1632 32] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-10-09T23:09:19,724-0400 [1632 32] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-10-09T23:09:21,956-0400 [1632 32] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-10-09T23:09:22,763-0400 [1632 32] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-10-09T23:09:22,764-0400 [1632 32] com.newrelic INFO: Agent run id: BRnCz0ayKKm3ADeO7jeaAOZjQ41EAAIBAAAnIQEAAAZgAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQANdHNhaGV5bHVtZWFwcA
+2022-10-09T23:09:22,764-0400 [1632 32] com.newrelic INFO: Agent 1632@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-10-09T23:09:22,764-0400 [1632 32] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-10-09T23:09:22,771-0400 [1632 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-09T23:09:22,772-0400 [1632 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-09T23:09:22,772-0400 [1632 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-09T23:09:22,817-0400 [1632 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-09T23:09:22,817-0400 [1632 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-09T23:09:22,817-0400 [1632 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-09T23:09:23,244-0400 [1632 32] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-10-09T23:09:23,244-0400 [1632 32] com.newrelic WARN: Not starting JFR Service. Core JFR APIs do not exist in this JVM.
+2022-10-10T21:06:17,866-0400 [19588 1] com.newrelic INFO: Writing to New Relic log file: F:\Workspace\TsaheyluMeApp\newrelic\logs\newrelic_agent.log
+2022-10-10T21:06:17,866-0400 [19588 1] com.newrelic INFO: JRE vendor Oracle Corporation version 1.8.0_333
+2022-10-10T21:06:17,866-0400 [19588 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 25.333-b02
+2022-10-10T21:06:17,866-0400 [19588 1] com.newrelic INFO: OS Windows 10 version 10.0 arch amd64
+2022-10-10T21:06:17,866-0400 [19588 1] com.newrelic INFO: Agent Host: Oswinsdream IP: 169.254.83.107
+2022-10-10T21:06:17,866-0400 [19588 1] com.newrelic INFO: New Relic Agent v7.10.0 is initializing...
+2022-10-10T21:06:18,321-0400 [19588 14] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2022-10-10T21:06:29,294-0400 [19588 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2022-10-10T21:06:30,397-0400 [19588 1] com.newrelic INFO: Setting audit_mode to false
+2022-10-10T21:06:30,639-0400 [19588 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is F:\Workspace\TsaheyluMeApp\newrelic\.\newrelic.yml
+2022-10-10T21:06:30,654-0400 [19588 1] com.newrelic INFO: New Relic Agent v7.10.0 has started
+2022-10-10T21:06:30,654-0400 [19588 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@1963006a
+2022-10-10T21:06:30,654-0400 [19588 1] com.newrelic INFO: Premain startup complete in 13,542ms
+2022-10-10T21:06:32,417-0400 [19588 1] com.newrelic INFO: Server Info: Apache Tomcat/9.0.55
+2022-10-10T21:06:45,693-0400 [19588 32] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-10-10T21:06:45,696-0400 [19588 32] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-10-10T21:06:47,895-0400 [19588 32] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-10-10T21:06:48,871-0400 [19588 32] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-10-10T21:06:48,871-0400 [19588 32] com.newrelic INFO: Agent run id: BReMI2bcU6Y0ADeO7jeaAOZjRMHwAAIBAAAnIQEAAEyEAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQANdHNhaGV5bHVtZWFwcA
+2022-10-10T21:06:48,871-0400 [19588 32] com.newrelic INFO: Agent 19588@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-10-10T21:06:48,872-0400 [19588 32] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-10-10T21:06:48,879-0400 [19588 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-10T21:06:48,879-0400 [19588 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-10T21:06:48,879-0400 [19588 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-10T21:06:48,926-0400 [19588 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-10T21:06:48,926-0400 [19588 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-10T21:06:48,926-0400 [19588 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-10T21:06:49,547-0400 [19588 32] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-10-10T21:06:49,548-0400 [19588 32] com.newrelic WARN: Not starting JFR Service. Core JFR APIs do not exist in this JVM.
+2022-10-10T21:11:34,112-0400 [22948 1] com.newrelic INFO: Writing to New Relic log file: F:\Workspace\TsaheyluMeApp\newrelic\logs\newrelic_agent.log
+2022-10-10T21:11:34,112-0400 [22948 1] com.newrelic INFO: JRE vendor Oracle Corporation version 1.8.0_333
+2022-10-10T21:11:34,112-0400 [22948 1] com.newrelic INFO: JVM vendor Oracle Corporation Java HotSpot(TM) 64-Bit Server VM version 25.333-b02
+2022-10-10T21:11:34,112-0400 [22948 1] com.newrelic INFO: OS Windows 10 version 10.0 arch amd64
+2022-10-10T21:11:34,112-0400 [22948 1] com.newrelic INFO: Agent Host: Oswinsdream IP: 169.254.83.107
+2022-10-10T21:11:34,112-0400 [22948 1] com.newrelic INFO: New Relic Agent v7.10.0 is initializing...
+2022-10-10T21:11:34,572-0400 [22948 14] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2022-10-10T21:11:45,514-0400 [22948 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.newrelic.com:443
+2022-10-10T21:11:46,612-0400 [22948 1] com.newrelic INFO: Setting audit_mode to false
+2022-10-10T21:11:46,857-0400 [22948 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is F:\Workspace\TsaheyluMeApp\newrelic\.\newrelic.yml
+2022-10-10T21:11:46,871-0400 [22948 1] com.newrelic INFO: New Relic Agent v7.10.0 has started
+2022-10-10T21:11:46,871-0400 [22948 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@1963006a
+2022-10-10T21:11:46,872-0400 [22948 1] com.newrelic INFO: Premain startup complete in 13,514ms
+2022-10-10T21:11:48,624-0400 [22948 1] com.newrelic INFO: Server Info: Apache Tomcat/9.0.55
+2022-10-10T21:12:01,891-0400 [22948 32] com.newrelic INFO: Host name is Oswinsdream, display host Oswinsdream for application My Application
+2022-10-10T21:12:01,895-0400 [22948 32] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2022-10-10T21:12:04,087-0400 [22948 32] com.newrelic INFO: Collector redirection to collector-003.newrelic.com:443
+2022-10-10T21:12:05,005-0400 [22948 32] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2022-10-10T21:12:05,006-0400 [22948 32] com.newrelic INFO: Agent run id: BQQ70Gi4zAOPADeO7jeaAOZjRMNYAAIBAAAnIQEAAFmkAgQ3mgMSAwAGNy4xMC4wAAtPc3dpbnNkcmVhbQANdHNhaGV5bHVtZWFwcA
+2022-10-10T21:12:05,006-0400 [22948 32] com.newrelic INFO: Agent 22948@Oswinsdream/My Application connected to collector.newrelic.com:443
+2022-10-10T21:12:05,006-0400 [22948 32] com.newrelic INFO: Reporting to: https://rpm.newrelic.com/accounts/3641070/applications/932840210
+2022-10-10T21:12:05,013-0400 [22948 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-10T21:12:05,014-0400 [22948 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-10T21:12:05,014-0400 [22948 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-10T21:12:05,059-0400 [22948 32] com.newrelic INFO: Using default collector host: collector.newrelic.com
+2022-10-10T21:12:05,060-0400 [22948 32] com.newrelic INFO: Using default metric ingest URI: https://metric-api.newrelic.com/metric/v1
+2022-10-10T21:12:05,060-0400 [22948 32] com.newrelic INFO: Using default event ingest URI: https://insights-collector.newrelic.com/v1/accounts/events
+2022-10-10T21:12:05,552-0400 [22948 32] com.newrelic INFO: Real user monitoring is enabled for application My Application. Auto instrumentation is enabled.
+2022-10-10T21:12:05,553-0400 [22948 32] com.newrelic WARN: Not starting JFR Service. Core JFR APIs do not exist in this JVM.

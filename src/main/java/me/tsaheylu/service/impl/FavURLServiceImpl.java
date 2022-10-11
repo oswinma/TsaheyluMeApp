@@ -2,6 +2,7 @@ package me.tsaheylu.service.impl;
 
 
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.DtoMapper.FavURLDtoMapper;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.FavURLStatus;
 import me.tsaheylu.dao.mapper.FavURLDaoMapper;
@@ -21,9 +22,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class FavURLServiceImpl implements FavURLService {
 
-    private final FavURLDaoMapper favurlMapper;
+    private final FavURLDaoMapper favurlDao;
     private final UserDaoMapper userDaoMapper;
-    private final FavURLDtoDaoMapper favURLDtoDaoMapper;
+    private final FavURLDtoDaoMapper favurlDtoDao;
+
+    private final FavURLDtoMapper favurlDtoMapper;
 
     @Override
     public HashMap<String, Object> getFavurlsByStatus(Long toids, String startCursor, int status) {
@@ -38,7 +41,7 @@ public class FavURLServiceImpl implements FavURLService {
             }
 
             List<FavURLDTO> list =
-                    favurlMapper.getFavURLShowListByToidStatusLimit(toid, status, fromlimit);
+                    favurlDao.getFavURLShowListByToidStatusLimit(toid, status, fromlimit);
 
             if (!list.isEmpty()) {
                 fromlimit = fromlimit + Constants.PAGE_SIZE;
@@ -55,12 +58,12 @@ public class FavURLServiceImpl implements FavURLService {
     @Override
     public FavURL getArchive(Long toid) {
 
-        return favurlMapper.Get(toid);
+        return favurlDao.Get(toid);
     }
 
     @Override
     public FavURL getNew(Long toid) {
-        return favurlMapper.Get(toid);
+        return favurlDao.Get(toid);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class FavURLServiceImpl implements FavURLService {
                 fromlimit = Long.valueOf(startCursor);
             }
 
-            List<FavURLDTO> list = favurlMapper.getFavFavURLShowListByToidLimit(toid, fromlimit);
+            List<FavURLDTO> list = favurlDao.getFavFavURLShowListByToidLimit(toid, fromlimit);
 
             if (!list.isEmpty()) {
                 fromlimit = fromlimit + Constants.PAGE_SIZE;
@@ -99,7 +102,7 @@ public class FavURLServiceImpl implements FavURLService {
             Long id = favURL.getId();
             int status = favURL.getStatus();
 
-            FavURL fu = favurlMapper.Get(Long.valueOf(id));
+            FavURL fu = favurlDao.Get(Long.valueOf(id));
 
             if (fu != null) {
                 if (status == FavURLStatus.NEW) {
@@ -123,7 +126,7 @@ public class FavURLServiceImpl implements FavURLService {
             }
 
             if (toid != 0l) {
-                favurlMapper.BatchUpdate(list);
+                favurlDao.BatchUpdate(list);
                 return true;
             }
         }
@@ -132,31 +135,32 @@ public class FavURLServiceImpl implements FavURLService {
 
     @Override
     public FavURL save(FavURL favURL) {
-        favURL.setId(favurlMapper.Insert(favURL));
+        favURL.setId(favurlDao.Insert(favURL));
         return favURL;
     }
 
     @Override
-    public FavURL update(FavURL favURL) {
-        favurlMapper.Update(favURL);
-        return favURL;
+    public FavURLDTO update(FavURLDTO favURLDTO) {
+        FavURL favURL = favurlDtoMapper.DtoTo(favURLDTO);
+        favurlDao.Update(favURL);
+        return toDto(favURL);
     }
 
     @Override
     public FavURL get(Long id) {
-        return favurlMapper.Get(id);
+        return favurlDao.Get(id);
     }
 
     @Override
     public void delete(Long id) {
-        favurlMapper.Delete(id);
+        favurlDao.Delete(id);
     }
 
     FavURLDTO toDto(FavURL favURL) {
-        return favURLDtoDaoMapper.getById(favURL.getId());
+        return favurlDtoDao.getById(favURL.getId());
     }
 
     List<FavURLDTO> toDtoList(List<FavURL> favURLList) {
-        return favURLDtoDaoMapper.getListById(favURLList);
+        return favurlDtoDao.getListById(favURLList);
     }
 }

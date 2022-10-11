@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.tsaheylu.DtoMapper.FavURLDtoMapper;
 import me.tsaheylu.common.FavURLStatus;
 import me.tsaheylu.common.response.ResponseResult;
+import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.User;
 import me.tsaheylu.service.FavURLService;
@@ -85,18 +86,17 @@ public class FavURLController {
         return favurlService.batchUpdateFavurlStatus(favurls);
     }
 
-//    @PostMapping
+    //    @PostMapping
 //    @ResponseStatus(code = HttpStatus.CREATED)
 //    private FavURLDTO create(@RequestBody FavURLDTO favURLDTO) {
 //        FavURL favURL = favURLDtoMapper.DtoTo(favURLDTO);
 //        return favURLDtoMapper.toDto(favurlService.save(favURL));
 //    }
 //
-//    @PutMapping
-//    private FavURLDTO update(@RequestBody FavURLDTO favURLDTO) {
-//        FavURL favURL = favURLDtoMapper.DtoTo(favURLDTO);
-//        return favURLDtoMapper.toDto(favurlService.update(favURL));
-//    }
+    @PutMapping
+    private FavURLDTO update(@RequestBody FavURLDTO favURLDTO) {
+        return favurlService.update(favURLDTO);
+    }
 //
 //    @GetMapping(value = "/{id}")
 //    private FavURLDTO get(@PathVariable Long id) {

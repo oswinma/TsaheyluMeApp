@@ -6,7 +6,12 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id("cz.habarta.typescript-generator") version "2.35.1025"
+
+    id "de.undercouch.download" version "3.4.3"
 }
+
+apply plugin: 'de.undercouch.download'
+
 group 'me.tsaheylu'
 version '1.0-SNAPSHOT'
 sourceCompatibility = '8'
@@ -40,6 +45,7 @@ dependencies {
 
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    implementation 'io.sentry:sentry-spring-boot-starter:6.4.2'
 
 }
 
@@ -50,4 +56,17 @@ test {
 bootRun {
 //    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5006"
 //    jvmArgs "-Djavax.net.debug=ssl:handshake:verbose"
+    jvmArgs "-javaagent:newrelic/newrelic.jar"
+}
+
+task downloadNewrelic(type: Download
+) {
+    mkdir 'newrelic'
+    src 'https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip'
+    dest file('newrelic')
+}
+
+task unzipNewrelic(type: Copy) {
+    from zipTree(file('newrelic/newrelic-java.zip'))
+    into rootDir
 }
