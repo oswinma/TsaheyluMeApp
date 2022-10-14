@@ -7,3 +7,4 @@
 /newrelic/logs/
 /mariadb/sql/
 /nginx/ssl/
+/target/
