@@ -2,6 +2,7 @@ package me.tsaheylu.controller;
 
 import lombok.RequiredArgsConstructor;
 import me.tsaheylu.DtoMapper.FriendDtoMapper;
+import me.tsaheylu.dto.ContactDTO;
 import me.tsaheylu.dto.FriendDTO;
 import me.tsaheylu.model.Friend;
 import me.tsaheylu.model.User;
@@ -11,10 +12,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller // This means that this class is a Controller
-@RequestMapping(path = "/api/friend") // This means URL's start with /demo (after Application path)
+@RequestMapping(path = "/api/friends") // This means URL's start with /demo (after Application path)
 @RequiredArgsConstructor
 public class FriendController {
 
@@ -73,6 +75,16 @@ public class FriendController {
         return friendDtoMapper.toDto(friendService.invite(friend));
     }
 
+
+    @GetMapping
+    public @ResponseBody
+    List<ContactDTO> getContactDTOList() {
+        // This returns a JSON or XML with the users
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+
+        return friendService.getContactDTOList(user.getId());
+    }
 
     /// api/friend
     /// api/friend/accept

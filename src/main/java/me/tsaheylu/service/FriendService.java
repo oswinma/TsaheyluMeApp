@@ -5,8 +5,10 @@ package me.tsaheylu.service;
 //import com.github.scribejava.core.oauth.OAuth10aService;
 //import com.github.scribejava.core.oauth.OAuth20Service;
 
+import me.tsaheylu.dto.ContactDTO;
 import me.tsaheylu.model.Friend;
 
+import java.util.List;
 import java.util.Map;
 
 public interface FriendService {
@@ -23,6 +25,8 @@ public interface FriendService {
     Friend update(Friend friend);
 
     Friend invite(Friend friend);
+
+    List<ContactDTO> getContactDTOList(Long fromid);
 
 //  public abstract HashMap<String, Object> getGoogleFriendsList(
 //      Long fromid, OAuth20Service gservice, OAuth2AccessToken accessToken);

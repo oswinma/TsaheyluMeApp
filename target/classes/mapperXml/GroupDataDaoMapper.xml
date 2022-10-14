@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.tsaheylu.dao.mapper.GroupDataDaoMapper">
+
+
+    <select id="getByToIdAndGroupId" resultType="me.tsaheylu.model.GroupData">
+        select * from groupdata
+        where toid = #{toid}
+        and groupid = #{groupid}
+    </select>
+
+
+    <select id="getByGroupId" resultType="me.tsaheylu.model.GroupData">
+        select * from groupdata
+        where status = 1
+        and groupid = #{groupid}
+    </select>
+
+    <select id="GetByGroupIdList" resultType="me.tsaheylu.model.GroupData">
+        select * from groupdata
+        where groupid in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="getNumByGroupId" resultType="java.lang.Integer">
+        select count(*) from groupdata
+        where groupid = #{groupid}
+        and status = 1
+    </select>
+
+
+    <insert id="Insert" parameterType="me.tsaheylu.model.GroupData" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into groupdata
+        (toid,groupid,status)
+        values
+        (#{toid},#{groupid},#{status})
+    </insert>
+
+
+    <delete id="Delete" parameterType="java.lang.Long">
+        delete from tsahaylu.GroupData where id=#{id}
+    </delete>
+
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from groupdata
+        where id in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+
+    <update id="Update" parameterType="me.tsaheylu.model.GroupData">
+        update tsahaylu.group
+        set
+        id = #{id}
+        toid = #{toid}
+        groupid = #{groupid}
+        status = #{status}
+        where id=#{id}
+    </update>
+
+
+    <update id="batchUpdate" parameterType="list">
+        <foreach collection="list" item="glist" separator=";">
+            UPDATE groupdata SET
+            toid = #{glist.toid},
+            groupid = #{glist.groupid},
+            status = #{glist.status},
+            addtime = #{glist.addtime}
+            WHERE id = #{glist.id}
+        </foreach>
+    </update>
+
+
+    <select id="getByFromIdAndToId" resultType="me.tsaheylu.model.GroupData">
+        select a.* from
+        groupdata as a
+        left join
+        tsahaylu.group as b
+        on a.groupid = b.id
+        where b.fromid = #{fromid}
+        and a.toid = #{toid}
+    </select>
+
+
+    <select id="Get" resultType="me.tsaheylu.model.GroupData">
+        select * from groupdata
+        where id = #{id}
+    </select>
+
+</mapper>

@@ -1,29 +1,37 @@
 package me.tsaheylu.model;
 
+import lombok.*;
 import me.tsaheylu.common.FriendStatus;
-import lombok.Getter;
-import lombok.Setter;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
-//@Entity
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Entity
+@Table(name = "friend")
 public class Friend {
 
-
-    //  @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "fromid")
     private Long fromid;
+
+    @Column(name = "toid")
     private Long toid;
+
+    @Column(name = "status")
     private int status = FriendStatus.INVALID.getId();
+
+    @Column(name = "popup")
     private boolean popup = true;
+
+    @Column(name = "bondtime")
     private Date bondtime;
 
 }
+//@Entity

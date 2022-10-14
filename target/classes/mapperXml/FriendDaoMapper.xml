@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.tsaheylu.dao.mapper.FriendDaoMapper">
+
+    <select id="getFriendsContactList" resultType="me.tsaheylu.dto.ContactDTO">
+        SELECT
+        a.id,
+        a.nickname,
+        a.avatarURL,
+        a.email,
+        b.popup,
+        b.id as friendid,
+        b.fromid,
+        b.status
+        from friend as b
+        left join user as a on b.toid = a.id
+        where b.fromid = #{fromid}
+        and (b.status = 1 or b.status =2)
+        and b.toid != #{toid}
+        order by b.bondtime
+    </select>
+
+    <select id="getFriends" resultType="me.tsaheylu.model.Friend">
+        SELECT
+        *
+        from friend as b
+        where b.fromid = #{fromid}
+        and (b.status = 1 or b.status =2)
+        and b.toid != #{toid}
+        order by b.bondtime
+    </select>
+
+    <select id="getFriend" resultType="me.tsaheylu.model.Friend">
+        select * from friend
+        where toid = #{toid}
+        and fromid = #{fromid}
+    </select>
+
+
+    <select id="getInvitations" resultType="me.tsaheylu.model.Friend">
+        select * from friend
+        where toid = #{toid}
+        and status = 0
+    </select>
+
+
+    <insert id="Insert" parameterType="me.tsaheylu.model.Friend" useGeneratedKeys="true" keyProperty="id">
+        insert into friend
+        (fromid,toid,status,popup,bondtime)
+        values
+        (#{fromid},#{toid},#{status},#{popup},#{bondtime})
+    </insert>
+
+
+    <update id="Update" parameterType="me.tsaheylu.model.Friend">
+        update friend set
+        fromid = #{fromid},
+        toid = #{toid},
+        status = #{status},
+        popup = #{popup},
+        bondtime = #{bondtime}
+        where id=#{id}
+    </update>
+
+
+    <select id="hasAvaliableFriends" resultType="java.lang.Integer">
+        select count(*) from friend
+        where fromid = #{fromid}
+        and toid!=#{toid}
+        and (status = 1 or status =2)
+    </select>
+
+    <select id="Get" resultType="me.tsaheylu.model.Friend">
+        select * from friend
+        where id = #{id}
+    </select>
+
+
+    <delete id="Delete" parameterType="java.lang.Long">
+        delete from friend where id=#{id}
+    </delete>
+
+    <select id="isFriend" resultType="java.lang.Integer">
+        select count(*) from friend
+        where fromid = #{fromid}
+        and toid = #{toid}
+    </select>
+
+
+    <insert id="batchInsert" keyProperty="id" useGeneratedKeys="true" parameterType="java.util.List">
+        insert into friend
+        (fromid,toid,status,popup,bondtime)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.fromid},#{item.toid},#{item.status},#{item.popup},#{item.bondtime})
+        </foreach>
+    </insert>
+
+    <select id="getSendFriends" resultType="me.tsaheylu.model.Friend">
+        SELECT
+        a.id,
+        a.fromid,
+        a.toid,
+        a.status,
+        a.bondtime,
+        b.popup
+        FROM
+        friend AS a
+        left JOIN friend AS b ON a.toid = b.fromid
+        AND b.toid = #{fromid}
+        AND b.status = 1
+        WHERE
+        a.fromid = #{fromid}
+        and a.toid != #{toid}
+        AND ( a.status = 1 OR a.status = 2 )
+    </select>
+
+    <select id="getSendGroupFriends" resultType="me.tsaheylu.model.Friend">
+        SELECT
+        a.id,
+        a.fromid,
+        a.toid,
+        a.status,
+        a.bondtime,
+        a.popup
+        FROM
+        friend AS a
+        LEFT JOIN groupdata AS c ON a.fromid = c.toid
+        and c.status =1
+        WHERE
+        a.toid = #{fromid}
+        AND a.status = 1
+        AND c.groupid in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getFavurlSubscriptionUsers" resultType="me.tsaheylu.model.Friend">
+        SELECT
+        a.id,
+        a.fromid,
+        a.toid,
+        a.status,
+        a.bondtime,
+        b.popup
+        FROM
+        friend AS a
+        RIGHT JOIN friend AS b ON a.toid = b.fromid
+        AND b.toid = #{fromid}
+        RIGHT JOIN user AS c ON c.id = a.toid
+        AND c.favurlSubscription = 1
+        WHERE
+        a.fromid = #{fromid}
+        AND b.status = 1
+        AND ( a.status = 1 OR a.status = 2 )
+    </select>
+
+    <select id="getEmailSubscriptionUsers" resultType="me.tsaheylu.model.Friend">
+
+    </select>
+
+</mapper>
