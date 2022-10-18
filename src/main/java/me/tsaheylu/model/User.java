@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
@@ -49,11 +50,11 @@ public class User implements UserDetails, Serializable {
     @Column(name = "status")
     private int status = UserStatus.INVALID;
 
-    @Column(name = "CreatedDate")
-    private Date CreatedDate;
-    //    @CreatedDate
+    @Column(name = "createdTime")
+    private Timestamp createdTime;
+
     @Column(name = "signuptime")
-    private Date signuptime;
+    private Timestamp signuptime;
 
     @Column(name = "favurlSubscription")
     private boolean favurlSubscription = true;

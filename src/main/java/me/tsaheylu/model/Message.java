@@ -1,46 +1,54 @@
 package me.tsaheylu.model;
 
+import lombok.*;
 import me.tsaheylu.common.MessageStatus;
 import me.tsaheylu.util.DateUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 //import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 //import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 
 //@Entity
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "message")
 public class Message {
-//  @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private Long fromid;
-  private Long toid;
-  private String type;
-  private int status = MessageStatus.UNREAD;
-  private String content;
-  private Date sendtime;
-  private Date readtime;
-  private Long refid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "fromid")
+    private Long fromid;
+    @Column(name = "toid")
+    private Long toid;
+    @Column(name = "type")
+    private String type;
 
-  public Message() {}
+    @Column(name = "status")
+    private int status = MessageStatus.UNREAD;
+    @Column(name = "content")
+    private String content;
+    @Column(name = "sendtime")
+    private Date sendtime;
 
-  public Message(
-      final long fromid,
-      final long toid,
-      final String type,
-      final String content,
-      final long refid) {
-    this.fromid = fromid;
-    this.toid = toid;
-    this.type = type;
-    this.content = content;
-    this.sendtime = DateUtils.getCurrentTime();
-    this.refid = refid;
-  }
+    @Column(name = "readtime")
+    private Date readtime;
+    @Column(name = "refid")
+    private Long refid;
+
+
+    public Message(final long fromid, final long toid, final String type, final String content, final long refid) {
+        this.fromid = fromid;
+        this.toid = toid;
+        this.type = type;
+        this.content = content;
+        this.sendtime = DateUtils.getCurrentTime();
+        this.refid = refid;
+    }
 }

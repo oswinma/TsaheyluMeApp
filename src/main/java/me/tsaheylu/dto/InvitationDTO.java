@@ -30,7 +30,6 @@ public class InvitationDTO {
         this.setPopup(f.isPopup());
         this.nickname = u.getNickname();
         this.avatarURL = u.getAvatarURL();
-
         this.bondtime = f.getBondtime();
     }
 

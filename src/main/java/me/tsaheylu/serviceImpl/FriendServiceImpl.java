@@ -101,13 +101,7 @@ public class FriendServiceImpl implements FriendService {
                 friendMapper.Insert(f);
             }
 
-            Message m =
-                    new Message(
-                            fromid,
-                            toid,
-                            MessageType.INVITATION.getType(),
-                            fu.getNickname() + Texts.MESSAGE_CONTENT_INVITEFRIEND,
-                            f.getId());
+            Message m = new Message(fromid, toid, MessageType.INVITATION.getType(), fu.getNickname() + Texts.MESSAGE_CONTENT_INVITEFRIEND, f.getId());
             messageMapper.Insert(m);
 
 //            messageservice.updateMsgNumToChannel(m.getToid());
@@ -122,5 +116,6 @@ public class FriendServiceImpl implements FriendService {
 
         return friendRepo.findContactDTOListByFromid(fromid, Constants.TsahayluTeamID);
     }
+
 
 }

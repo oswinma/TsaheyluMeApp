@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.security.sasl.AuthenticationException;
 
 @RestController // This means that this class is a Controller
-@RequestMapping(path = "/api/message") // This means URL's start with /demo (after Application path)
+@RequestMapping(path = "/api/messages") // This means URL's start with /demo (after Application path)
 @ResponseResult
 public class MessageController {
 
     @Autowired
     private MessageService messageService;
-//    /api/message
+
+    //    /api/message
 ///api/message/remove
 ///api/message/unreadnum
-@GetMapping(value = "/unreadnum")
-public Integer getUnreadNum() throws AuthenticationException {
-    return messageService.getUnreadNum();
-}
+    @GetMapping(value = "/unreadnum")
+    public Integer getUnreadNum() throws AuthenticationException {
+        return messageService.getUnreadNum();
+    }
 
 
 }

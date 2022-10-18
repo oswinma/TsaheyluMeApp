@@ -8,3 +8,4 @@
 /mariadb/sql/
 /nginx/ssl/
 /target/
+/.mvn/

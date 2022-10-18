@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import me.tsaheylu.model.Friend;
 import me.tsaheylu.model.User;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
@@ -21,6 +24,9 @@ public class ContactDTO {
     private Long fromid;
     private int status;
     private boolean popup;
+
+    private Long toid;
+    private Date bondtime;
 
 
     public ContactDTO(String nickname, String email) {
@@ -43,6 +49,8 @@ public class ContactDTO {
         this.fromid = f.getFromid();
         this.status = f.getStatus();
         this.email = u.getEmail();
-        this.setPopup(f.isPopup());
+        this.popup = f.isPopup();
+        this.toid = f.getToid();
+        this.bondtime = f.getBondtime();
     }
 }

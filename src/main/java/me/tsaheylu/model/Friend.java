@@ -4,6 +4,7 @@ import lombok.*;
 import me.tsaheylu.common.FriendStatus;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @AllArgsConstructor
