@@ -31,7 +31,7 @@ public class Message {
     private String type;
 
     @Column(name = "status")
-    private int status = MessageStatus.UNREAD;
+    private int status = MessageStatus.UNREAD.getId();
     @Column(name = "content")
     private String content;
     @Column(name = "sendtime")

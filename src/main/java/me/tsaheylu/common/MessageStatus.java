@@ -1,7 +1,13 @@
 package me.tsaheylu.common;
 
-public class MessageStatus {
-        
-    public static int UNREAD = 0;
-    public static int READ = 1;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum MessageStatus {
+
+    UNREAD(0), READ(1), DELETED(2);
+
+    private final int Id;
 }

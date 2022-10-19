@@ -31,7 +31,7 @@ public interface FriendRepo extends CrudRepository<Friend, Long> {
             "      from Friend as b" +
             "      left join User as a on b.fromid = a.id " +
             "      where b.fromid = :fromid " +
-            "      and (b.status = :status) " +
+            "      and (:status is null or b.status = :status) " +
             "      order by b.bondtime desc")
     List<InvitationDTO> getInvitationDTOList(Long fromid, int status);
 }
