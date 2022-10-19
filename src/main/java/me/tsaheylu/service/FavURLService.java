@@ -32,7 +32,12 @@ public interface FavURLService {
 
     FavURLDTO update(FavURLDTO favURLDTO);
 
-    FavURL get(Long id);
+
+    FavURLDTO getDto(Long id);
 
     void delete(Long id);
+
+    FavURLDTO createFavurl(FavURLDTO favURLDTO);
+
+    List<FavURL> sendFavurls(Long fromid, String groupidss, boolean toall, boolean tome, String url, String urltitles, String iconurls);
 }

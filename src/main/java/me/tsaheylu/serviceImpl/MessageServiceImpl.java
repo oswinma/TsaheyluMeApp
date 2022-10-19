@@ -2,11 +2,15 @@ package me.tsaheylu.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
 import me.tsaheylu.common.MessageStatus;
+import me.tsaheylu.common.MessageType;
+import me.tsaheylu.common.Texts;
 import me.tsaheylu.dto.MessageDTO;
+import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.Message;
 import me.tsaheylu.model.User;
 import me.tsaheylu.repository.MessageRepo;
 import me.tsaheylu.service.MessageService;
+import me.tsaheylu.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +23,8 @@ import java.util.stream.Collectors;
 public class MessageServiceImpl implements MessageService {
 
     private final MessageRepo messageRepo;
+
+    private final UserService userService;
 
     @Override
     public Integer getUnreadNum() {
@@ -81,5 +87,27 @@ public class MessageServiceImpl implements MessageService {
 
     List<MessageDTO> toDtoList(List<Message> messageList) {
         return messageRepo.getDtoListById(messageList.stream().map(Message::getId).collect(Collectors.toList()));
+    }
+
+
+    @Override
+    public Message buildFavurlSendMessage(FavURL fu) {
+
+        Long fromid = fu.getFromid();
+        Long toid = fu.getToid();
+        User u = userService.Get(fromid);
+        Message m = new Message();
+        m.setFromid(fromid);
+        m.setToid(toid);
+        m.setType(MessageType.FAVURL.getType());
+        m.setContent(u.getNickname() + Texts.MESSAGE_CONTENT_FAVURL);
+        m.setSendtime(fu.getSendtime());
+        m.setRefid(fu.getId());
+        return m;
+    }
+
+    @Override
+    public void saveAll(List<Message> mlist) {
+        messageRepo.saveAll(mlist);
     }
 }

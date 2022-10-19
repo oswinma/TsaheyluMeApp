@@ -17,6 +17,8 @@ public interface UserService extends UserDetailsService {
 
   User getUser();
 
+  User Get(Long id);
+
   //  public abstract String getAvatar(String id);
   //
   //  public abstract UserDTO conUserToUserDTO(User u);

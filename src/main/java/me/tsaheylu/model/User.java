@@ -48,7 +48,7 @@ public class User implements UserDetails, Serializable {
     private String code;
 
     @Column(name = "status")
-    private int status = UserStatus.INVALID;
+    private int status = UserStatus.INVALID.getId();
 
     @Column(name = "createdTime")
     private Timestamp createdTime;

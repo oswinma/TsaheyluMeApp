@@ -28,6 +28,10 @@ public interface FriendService {
 
     List<ContactDTO> getContactDTOList(Long fromid);
 
+    List<Friend> getSendFriendList(Long fromid);
+
+    List<Friend> getSendFriendListByFromidAndGroupidList(Long fromid, List<String> groupidlist);
+
 //  public abstract HashMap<String, Object> getGoogleFriendsList(
 //      Long fromid, OAuth20Service gservice, OAuth2AccessToken accessToken);
 //

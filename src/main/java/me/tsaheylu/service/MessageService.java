@@ -2,6 +2,7 @@ package me.tsaheylu.service;
 
 import me.tsaheylu.dto.InvitationDTO;
 import me.tsaheylu.dto.MessageDTO;
+import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.Message;
 import org.springframework.scheduling.annotation.Async;
 
@@ -32,4 +33,8 @@ public interface MessageService {
     List<MessageDTO> getMessageDTOListByFromid(Long fromid);
 
     List<MessageDTO> getUnreadMessageDTOListByFromid(Long fromid);
+
+    Message buildFavurlSendMessage(FavURL fu);
+
+    void saveAll(List<Message> mlist);
 }

@@ -1,7 +1,13 @@
 package me.tsaheylu.common;
 
-public class UserStatus {
-        
-    public static int INVALID = 0;
-    public static int VALID = 1;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum UserStatus {
+
+    INVALID(0), VALID(1);
+
+    private final int Id;
 }

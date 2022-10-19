@@ -12,6 +12,7 @@ import me.tsaheylu.dto.ContactDTO;
 import me.tsaheylu.model.Friend;
 import me.tsaheylu.model.Message;
 import me.tsaheylu.model.User;
+import me.tsaheylu.repository.FavurlRepo;
 import me.tsaheylu.repository.FriendRepo;
 import me.tsaheylu.service.FriendService;
 import me.tsaheylu.util.DateUtils;
@@ -30,6 +31,7 @@ public class FriendServiceImpl implements FriendService {
     private final FriendRepo friendRepo;
     private final UserDaoMapper userDaoMapper;
     private final MessageDaoMapper messageMapper;
+
 
     @Override
     public boolean hasAvaliableFriends(Long userid) {
@@ -115,6 +117,16 @@ public class FriendServiceImpl implements FriendService {
     public List<ContactDTO> getContactDTOList(Long fromid) {
 
         return friendRepo.findContactDTOListByFromid(fromid, Constants.TsahayluTeamID);
+    }
+
+    @Override
+    public List<Friend> getSendFriendList(Long fromid) {
+        return friendRepo.findSendFriendListByFromid(fromid, Constants.TsahayluTeamID);
+    }
+
+    @Override
+    public List<Friend> getSendFriendListByFromidAndGroupidList(Long fromid, List<String> groupidlist) {
+        return friendRepo.findSendFriendListByFromidAndGroupidList(fromid, groupidlist);
     }
 
 

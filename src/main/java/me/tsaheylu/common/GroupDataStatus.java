@@ -1,7 +1,15 @@
 package me.tsaheylu.common;
 
-public class GroupDataStatus {
-        
-    public static int INVALID = 0;
-    public static int VALID = 1;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public enum GroupDataStatus {
+
+    INVALID(0), VALID(1);
+
+    private final int Id;
+
 }

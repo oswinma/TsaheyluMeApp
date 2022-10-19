@@ -1,7 +1,15 @@
 package me.tsaheylu.common;
 
-public class URLInfoStatus {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-  public static int VALID = 0;
-  public static int Recommendation = 1;
+@Getter
+@AllArgsConstructor
+public enum URLInfoStatus {
+
+
+    VALID(0), Recommendation(1);
+
+    private final int Id;
+
 }
