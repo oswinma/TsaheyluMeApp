@@ -6,6 +6,7 @@ import me.tsaheylu.DtoMapper.FavURLDtoMapper;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.FavURLChannel;
 import me.tsaheylu.common.FavURLStatus;
+import me.tsaheylu.controller.WebsocketController;
 import me.tsaheylu.dao.mapper.FavURLDaoMapper;
 import me.tsaheylu.dao.mapper.FavURLDtoDaoMapper;
 import me.tsaheylu.dao.mapper.UserDaoMapper;
@@ -15,12 +16,11 @@ import me.tsaheylu.model.Friend;
 import me.tsaheylu.model.Message;
 import me.tsaheylu.model.URLInfo;
 import me.tsaheylu.repository.FavurlRepo;
-import me.tsaheylu.service.FavURLService;
-import me.tsaheylu.service.FriendService;
-import me.tsaheylu.service.MessageService;
-import me.tsaheylu.service.UrlinfoService;
+import me.tsaheylu.service.*;
 import me.tsaheylu.util.CommonUtils;
 import me.tsaheylu.util.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class FavURLServiceImpl implements FavURLService {
-
+    private static final Logger logger = LoggerFactory.getLogger(WebsocketController.class);
     private final FavURLDaoMapper favurlDao;
     private final UserDaoMapper userDaoMapper;
     private final FavURLDtoDaoMapper favurlDtoDao;
@@ -43,6 +43,7 @@ public class FavURLServiceImpl implements FavURLService {
     private final FriendService friendService;
     private final MessageService messageService;
 
+    private final PushChannelService pushChannelService;
 
     @Override
     public HashMap<String, Object> getFavurlsByStatus(Long toids, String startCursor, int status) {
@@ -316,9 +317,10 @@ public class FavURLServiceImpl implements FavURLService {
                 for (int i = 0; i < len; i++) {
                     FavURL ful = flist.get(i);
                     ful.setSerial(serial);
+                    logger.debug(ful.getStatus()+"");
                     if (ful.getStatus() == FavURLStatus.PENDING.getId()) {
 
-//                        pushchannelservice.sendToChannel(toDto(ful));
+                        pushChannelService.sendToChannel(toDto(ful));
                     } else {
                         Message sm = messageService.buildFavurlSendMessage(ful);
                         mlist.add(sm);
@@ -332,10 +334,11 @@ public class FavURLServiceImpl implements FavURLService {
 
                 if (!mlist.isEmpty()) {
                     messageService.saveAll(mlist);
-                    for (int i = 0, mlen = mlist.size(); i < mlen; i++) {
-                        Message m = mlist.get(i);
-//                        messageService.updateMsgNumToChannel(m.getToid());
-                    }
+
+                    mlist.forEach(m -> {
+                        messageService.updateMsgNumToChannel(m);
+                    });
+
                 }
             }
         }

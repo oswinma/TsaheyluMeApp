@@ -15,7 +15,5 @@ public class MessageNumDTO {
 
     private Long toid;
 
-    private Long num = 0l;
-
-
+    private int num = 0;
 }

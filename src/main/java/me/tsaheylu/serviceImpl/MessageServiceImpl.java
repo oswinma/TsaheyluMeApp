@@ -5,11 +5,13 @@ import me.tsaheylu.common.MessageStatus;
 import me.tsaheylu.common.MessageType;
 import me.tsaheylu.common.Texts;
 import me.tsaheylu.dto.MessageDTO;
+import me.tsaheylu.dto.MessageNumDTO;
 import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.Message;
 import me.tsaheylu.model.User;
 import me.tsaheylu.repository.MessageRepo;
 import me.tsaheylu.service.MessageService;
+import me.tsaheylu.service.PushChannelService;
 import me.tsaheylu.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class MessageServiceImpl implements MessageService {
 
     private final UserService userService;
 
+    private final PushChannelService pushChannelService;
+
+
     @Override
     public Integer getUnreadNum() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -36,9 +41,8 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public MessageDTO createMessage(Message message) {
-        messageRepo.save(message);
-//    messageservice.updateMsgNumToChannel(m.getToid());
-
+        message = messageRepo.save(message);
+        updateMsgNumToChannel(message);
         return null;
     }
 
@@ -109,5 +113,15 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void saveAll(List<Message> mlist) {
         messageRepo.saveAll(mlist);
+    }
+
+
+    @Override
+    public void updateMsgNumToChannel(Message message) {
+
+        Long toid = message.getToid();
+        int num = messageRepo.getUnReadMsgNum(toid);
+        MessageNumDTO messageNumDTO = new MessageNumDTO(toid, num);
+        pushChannelService.sendMsgNumToChannel(messageNumDTO);
     }
 }

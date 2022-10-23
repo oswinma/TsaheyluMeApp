@@ -37,4 +37,6 @@ public interface MessageService {
     Message buildFavurlSendMessage(FavURL fu);
 
     void saveAll(List<Message> mlist);
+
+    void updateMsgNumToChannel(Message message);
 }

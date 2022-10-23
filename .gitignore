@@ -9,3 +9,4 @@
 /nginx/ssl/
 /target/
 /.mvn/
+/src/main/resources/tsahayluapp-firebase.json
