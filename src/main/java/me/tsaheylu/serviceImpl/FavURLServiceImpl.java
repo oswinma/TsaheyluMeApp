@@ -199,7 +199,7 @@ public class FavURLServiceImpl implements FavURLService {
 
 
     @Override
-    public List<FavURL> sendFavurls(Long fromid, String groupidss, boolean toall, boolean tome, String url, String urltitles, String iconurls) {
+    public List<FavURL> sendFavurls(Long fromid, String groupidss, boolean toall, boolean tome, String url, String urltitle, String iconurls) {
 
 //        Long fromid = Long.valueOf(fromids);
         URLInfo urlInfo = urlinfoService.getByUrl(url);
@@ -207,7 +207,7 @@ public class FavURLServiceImpl implements FavURLService {
             urlInfo = new URLInfo();
             urlInfo.setUrl(url);
             urlInfo.setHost(CommonUtils.getHostByUrl(url));
-            urlInfo.setTitle(urltitles);
+            urlInfo.setTitle(urltitle);
             urlInfo.setShare(1l);
             if (iconurls != null) {
                 urlInfo.setIcon(iconurls);

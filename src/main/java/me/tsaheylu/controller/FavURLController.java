@@ -98,8 +98,8 @@ public class FavURLController {
 
     @PostMapping(value = "/send")
     @ResponseStatus(code = HttpStatus.CREATED)
-    private List<FavURL> send(@RequestParam(required = true) Long fromid, @RequestParam(required = true) String groupidss, @RequestParam(required = true) boolean toall, @RequestParam(required = true) boolean tome, @RequestParam(required = true) String url, @RequestParam(required = true) String urltitles, @RequestParam(required = true) String iconurls) {
-        return favurlService.sendFavurls(fromid, groupidss, toall, tome, url, urltitles, iconurls);
+    private List<FavURL> send(@RequestParam(required = true) Long fromId, @RequestParam(required = true) String groupIds, @RequestParam(required = true) boolean toAll, @RequestParam(required = true) boolean toMe, @RequestParam(required = true) String url, @RequestParam(required = true) String urlTitle, @RequestParam(required = true) String iconUrl) {
+        return favurlService.sendFavurls(fromId, groupIds, toAll, toMe, url, urlTitle, iconUrl);
     }
 
     //

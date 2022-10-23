@@ -34,5 +34,16 @@ public interface FavurlRepo extends CrudRepository<FavURL, Long> {
             "       where toid = :toid  " +
             "       and status = :status ", nativeQuery = true)
     int getNumByToidAndStatus(Long toid, Integer status);
+
+
+    @Query("        SELECT new me.tsaheylu.dto.FavURLDTO(favurl,urlinfo,user) " +
+            "      from FavURL as favurl" +
+            "      left join User as user on favurl.fromid = user.id " +
+            "      left join URLInfo as urlinfo on favurl.urlid = urlinfo.id " +
+            "      where favurl.toid = :toid" +
+            " and favurl.status = :status " +
+            "      order by favurl.sendtime desc")
+    List<FavURLDTO> getDtoListByToidAndStatus(Long toid, Integer status);
+
 }
 

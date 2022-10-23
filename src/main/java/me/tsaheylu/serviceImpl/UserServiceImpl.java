@@ -4,12 +4,10 @@ import io.sentry.spring.tracing.SentrySpan;
 import lombok.RequiredArgsConstructor;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
-import me.tsaheylu.dao.mapper.UserDaoMapper;
 import me.tsaheylu.model.User;
 import me.tsaheylu.repository.UserRepo;
 import me.tsaheylu.service.UserService;
 import me.tsaheylu.util.CommonUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +20,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private UserDaoMapper userDaoMapper;
     //  @Autowired private JwtTokenComponent jwtTokenComponent;
     //  @Autowired private AuthenticationManager authenticationManager;
 
@@ -47,7 +44,7 @@ public class UserServiceImpl implements UserService {
         String id = null;
         String token = null;
 
-        User u = userDaoMapper.getUserByEmail(emails);
+        User u = userRepo.findByEmail(emails);
         if (u == null) {
             pass = Constants.RETURN_FAILUTE;
             msg = Texts.MESSAGE_ERROR_EMAILINVALID;
@@ -95,7 +92,8 @@ public class UserServiceImpl implements UserService {
         String msg = null;
 
         if (CommonUtils.checkEmailFormat(email)) {
-            User u = userDaoMapper.getUserByEmail(email);
+            User u = userRepo.findByEmail(email);
+            ;
             if (u == null) {
                 pass = Constants.RETURN_SUCCESS;
                 msg = Texts.MESSAGE_PASS_VALIDATE;
