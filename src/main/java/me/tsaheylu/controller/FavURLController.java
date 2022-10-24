@@ -65,11 +65,18 @@ public class FavURLController {
         return favurlService.getFav(user.getId(), startCursor);
     }
 
-    @PostMapping(path = "/status")
+    @PatchMapping(path = "/status")
     public @ResponseBody boolean updateStatus(@RequestBody List<FavURL> favurls) {
         // This returns a JSON or XML with the users
 
         return favurlService.batchUpdateFavurlStatus(favurls);
+    }
+
+    @PatchMapping(path = "/channel")
+    public @ResponseBody FavURLDTO updateChannel(@RequestParam(required = true) Long id, @RequestParam(required = true) String channel) {
+        // This returns a JSON or XML with the users
+
+        return favurlService.updateChannel(id, channel);
     }
 
     @PostMapping

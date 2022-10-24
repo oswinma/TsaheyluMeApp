@@ -103,9 +103,9 @@ public class PushChannelServiceImpl implements PushChannelService {
     }
 
     @Override
-    public void removeFromChannel(FavURL favurl) {
+    public void removeFromChannel(FavURL favURL) {
 
-        String path = String.format("/channels/%s/FavURLShows/%s", favurl.getToid(), favurl.getId());
+        String path = String.format("/channels/%s/FavURLDtoList/%s", favURL.getToid(), favURL.getId());
         firebaseDelete(path);
     }
 

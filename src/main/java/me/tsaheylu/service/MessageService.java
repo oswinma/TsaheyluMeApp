@@ -1,5 +1,6 @@
 package me.tsaheylu.service;
 
+import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.dto.InvitationDTO;
 import me.tsaheylu.dto.MessageDTO;
 import me.tsaheylu.model.FavURL;
@@ -24,6 +25,8 @@ public interface MessageService {
 
     public abstract MessageDTO save(MessageDTO messageDTO);
 
+    Message saveEntity(Message message);
+
     public abstract void delete(Long id);
 
     public abstract MessageDTO get(Long id);
@@ -34,7 +37,11 @@ public interface MessageService {
 
     List<MessageDTO> getUnreadMessageDTOListByFromid(Long fromid);
 
+    Message buildFavurlReadMessage(FavURLDTO favURLDTO);
+
     Message buildFavurlSendMessage(FavURL fu);
+
+
 
     void saveAll(List<Message> mlist);
 

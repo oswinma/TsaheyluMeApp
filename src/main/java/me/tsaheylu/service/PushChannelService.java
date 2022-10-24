@@ -16,7 +16,7 @@ public interface PushChannelService {
 
     public abstract void removeMsgNumFromChannel(MessageNumDTO msgnum);
 
-    public abstract void removeFromChannel(FavURL favurl);
+    public abstract void removeFromChannel(FavURL favURL);
 
     public abstract void sendToChannel(FavURLDTO favurlDto);
 

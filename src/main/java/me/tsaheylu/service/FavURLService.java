@@ -40,4 +40,6 @@ public interface FavURLService {
     FavURLDTO createFavurl(FavURLDTO favURLDTO);
 
     List<FavURL> sendFavurls(Long fromid, String groupidss, boolean toall, boolean tome, String url, String urltitles, String iconurls);
+
+    FavURLDTO updateChannel(Long id, String channel);
 }

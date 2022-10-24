@@ -1,9 +1,12 @@
 package me.tsaheylu.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.DtoMapper.MessageDtoMapper;
+import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.MessageStatus;
 import me.tsaheylu.common.MessageType;
 import me.tsaheylu.common.Texts;
+import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.dto.MessageDTO;
 import me.tsaheylu.dto.MessageNumDTO;
 import me.tsaheylu.model.FavURL;
@@ -30,6 +33,7 @@ public class MessageServiceImpl implements MessageService {
 
     private final PushChannelService pushChannelService;
 
+    private final MessageDtoMapper messageDtoMapper;
 
     @Override
     public Integer getUnreadNum() {
@@ -48,7 +52,15 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public MessageDTO save(MessageDTO messageDTO) {
-        return null;
+        Message message = messageDtoMapper.DtoTo(messageDTO);
+        message = messageRepo.save(message);
+        return toDto(message);
+    }
+
+    @Override
+    public Message saveEntity(Message message) {
+        message = messageRepo.save(message);
+        return message;
     }
 
     @Override
@@ -95,22 +107,6 @@ public class MessageServiceImpl implements MessageService {
 
 
     @Override
-    public Message buildFavurlSendMessage(FavURL fu) {
-
-        Long fromid = fu.getFromid();
-        Long toid = fu.getToid();
-        User u = userService.Get(fromid);
-        Message m = new Message();
-        m.setFromid(fromid);
-        m.setToid(toid);
-        m.setType(MessageType.FAVURL.getType());
-        m.setContent(u.getNickname() + Texts.MESSAGE_CONTENT_FAVURL);
-        m.setSendtime(fu.getSendtime());
-        m.setRefid(fu.getId());
-        return m;
-    }
-
-    @Override
     public void saveAll(List<Message> mlist) {
         messageRepo.saveAll(mlist);
     }
@@ -123,5 +119,39 @@ public class MessageServiceImpl implements MessageService {
         int num = messageRepo.getUnReadMsgNum(toid);
         MessageNumDTO messageNumDTO = new MessageNumDTO(toid, num);
         pushChannelService.sendMsgNumToChannel(messageNumDTO);
+    }
+
+    @Override
+    public Message buildFavurlReadMessage(FavURLDTO favURLDTO) {
+
+        Long fromid = favURLDTO.getToid();
+        Long toid = favURLDTO.getFromid();
+        if (toid == Constants.TsahayluTeamID) {
+            return null;
+        }
+        Message rm = new Message();
+        rm.setFromid(fromid);
+        rm.setToid(toid);
+        rm.setType(MessageType.FAVURL.getType());
+        rm.setContent(favURLDTO.getNickname() + Texts.MESSAGE_CONTENT_FAVURL_READ);
+        rm.setSendtime(favURLDTO.getReadtime());
+        rm.setRefid(favURLDTO.getId());
+        return rm;
+    }
+
+    @Override
+    public Message buildFavurlSendMessage(FavURL favURL) {
+
+        Long fromid = favURL.getFromid();
+        Long toid = favURL.getToid();
+        User u = userService.Get(fromid);
+        Message m = new Message();
+        m.setFromid(fromid);
+        m.setToid(toid);
+        m.setType(MessageType.FAVURL.getType());
+        m.setContent(u.getNickname() + Texts.MESSAGE_CONTENT_FAVURL);
+        m.setSendtime(favURL.getSendtime());
+        m.setRefid(favURL.getId());
+        return m;
     }
 }

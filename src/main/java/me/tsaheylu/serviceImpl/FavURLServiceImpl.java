@@ -8,8 +8,6 @@ import me.tsaheylu.common.FavURLChannel;
 import me.tsaheylu.common.FavURLStatus;
 import me.tsaheylu.controller.WebsocketController;
 import me.tsaheylu.dao.mapper.FavURLDaoMapper;
-import me.tsaheylu.dao.mapper.FavURLDtoDaoMapper;
-import me.tsaheylu.dao.mapper.UserDaoMapper;
 import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.Friend;
@@ -32,8 +30,6 @@ import java.util.stream.Collectors;
 public class FavURLServiceImpl implements FavURLService {
     private static final Logger logger = LoggerFactory.getLogger(WebsocketController.class);
     private final FavURLDaoMapper favurlDao;
-    private final UserDaoMapper userDaoMapper;
-    private final FavURLDtoDaoMapper favurlDtoDao;
 
     private final FavURLDtoMapper favurlDtoMapper;
 
@@ -317,7 +313,7 @@ public class FavURLServiceImpl implements FavURLService {
                 for (int i = 0; i < len; i++) {
                     FavURL ful = flist.get(i);
                     ful.setSerial(serial);
-                    logger.debug(ful.getStatus()+"");
+                    logger.debug(ful.getStatus() + "");
                     if (ful.getStatus() == FavURLStatus.PENDING.getId()) {
 
                         pushChannelService.sendToChannel(toDto(ful));
@@ -343,5 +339,43 @@ public class FavURLServiceImpl implements FavURLService {
             }
         }
         return list;
+    }
+
+    @Override
+    public FavURLDTO updateChannel(Long id, String channel) {
+        // TODO Auto-generated method stub
+
+        Optional<FavURL> optionalFavURL = favurlRepo.findById(id);
+        FavURLDTO favURLDTO = null;
+        if (optionalFavURL.isPresent()) {
+            FavURL favURL = optionalFavURL.get();
+            Date readtime = DateUtils.getCurrentTime();
+            favURL.setReadtime(readtime);
+
+            Message message = null;
+            if (FavURLChannel.CHROME.getType().equals(channel)) {
+                favURL.setStatus(FavURLStatus.ARCHIVE.getId());
+                favURL.setChannel(FavURLChannel.CHROME.getType());
+                favURLDTO = toDto(favURL);
+                message = messageService.buildFavurlReadMessage(favURLDTO);
+            }
+
+            if (FavURLChannel.WEB.getType().equals(channel)) {
+                favURL.setStatus(FavURLStatus.NEW.getId());
+                favURL.setChannel(FavURLChannel.WEB.getType());
+                message = messageService.buildFavurlSendMessage(favURL);
+            }
+
+            favurlRepo.save(favURL);
+
+            if (message != null) {
+                messageService.saveEntity(message);
+                messageService.updateMsgNumToChannel(message);
+            }
+
+            pushChannelService.removeFromChannel(favURL);
+        }
+
+        return favURLDTO;
     }
 }

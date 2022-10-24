@@ -1,5 +1,6 @@
 package me.tsaheylu.controller;
 
+import lombok.RequiredArgsConstructor;
 import me.tsaheylu.common.response.ResponseResult;
 import me.tsaheylu.dto.InvitationDTO;
 import me.tsaheylu.dto.MessageDTO;
@@ -16,14 +17,13 @@ import java.util.List;
 @RestController // This means that this class is a Controller
 @RequestMapping(path = "/api/messages") // This means URL's start with /demo (after Application path)
 @ResponseResult
+@RequiredArgsConstructor
 public class MessageController {
 
-    @Autowired
-    private MessageService messageService;
+    private final MessageService messageService;
 
     //    /api/message
 ///api/message/remove
-///api/message/unreadnum
     @GetMapping(value = "/unreadnum")
     public Integer getUnreadNum() throws AuthenticationException {
         return messageService.getUnreadNum();

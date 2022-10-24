@@ -2,7 +2,9 @@ package me.tsaheylu.DtoMapper;
 
 
 import me.tsaheylu.dto.FavURLDTO;
+import me.tsaheylu.dto.MessageDTO;
 import me.tsaheylu.model.FavURL;
+import me.tsaheylu.model.Message;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -25,12 +27,12 @@ public interface MessageDtoMapper {
 //
 //    }
 
-    FavURL DtoTo(FavURLDTO favURLDTO);
+    Message DtoTo(MessageDTO messageDTO);
 
 //    List<FavURLDTO> toDtoList(List<FavURL> favURLList) {
 //
 //    }
 
-    List<FavURL> dtoToList(List<FavURLDTO> favURLDTOList);
+    List<Message> dtoToList(List<MessageDTO> messageDTOList);
 }
 
