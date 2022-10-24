@@ -316,7 +316,7 @@ public class FavURLServiceImpl implements FavURLService {
                     logger.debug(ful.getStatus() + "");
                     if (ful.getStatus() == FavURLStatus.PENDING.getId()) {
 
-                        pushChannelService.sendToChannel(toDto(ful));
+                        pushChannelService.sendToChannel(ful);
                     } else {
                         Message sm = messageService.buildFavurlSendMessage(ful);
                         mlist.add(sm);
@@ -349,6 +349,7 @@ public class FavURLServiceImpl implements FavURLService {
         FavURLDTO favURLDTO = null;
         if (optionalFavURL.isPresent()) {
             FavURL favURL = optionalFavURL.get();
+            pushChannelService.removeFromChannel(favURL); //avoid duplicate tabs in browser when send favurl to same user
             Date readtime = DateUtils.getCurrentTime();
             favURL.setReadtime(readtime);
 
@@ -373,7 +374,6 @@ public class FavURLServiceImpl implements FavURLService {
                 messageService.updateMsgNumToChannel(message);
             }
 
-            pushChannelService.removeFromChannel(favURL);
         }
 
         return favURLDTO;

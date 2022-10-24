@@ -110,16 +110,9 @@ public class PushChannelServiceImpl implements PushChannelService {
     }
 
     @Override
-    public void sendToChannel(FavURLDTO favurlDto) {
-        Map<String, Object> fs = new HashMap<String, Object>();
-        fs.put(favurlDto.getId().toString(), favurlDto);
-        Map<String, Object> id = new HashMap<String, Object>();
-        id.put(favurlDto.getToid().toString(), fs);
-        Map<String, Object> channels = new HashMap<String, Object>();
-        channels.put("channels", id);
-
-        String path = String.format("/channels/%s/FavURLDtoList/%s", favurlDto.getToid(), favurlDto.getId());
-        firebasePut(path, favurlDto);
+    public void sendToChannel(FavURL favURL) {
+        String path = String.format("/channels/%s/FavURLDtoList/%s", favURL.getToid(), favURL.getId());
+        firebasePut(path, favURL.getId());
     }
 
     @Override

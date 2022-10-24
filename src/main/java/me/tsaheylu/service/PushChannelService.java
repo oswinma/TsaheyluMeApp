@@ -18,7 +18,7 @@ public interface PushChannelService {
 
     public abstract void removeFromChannel(FavURL favURL);
 
-    public abstract void sendToChannel(FavURLDTO favurlDto);
+    public abstract void sendToChannel(FavURL favURL);
 
     public abstract void sendGroupsToChannel(int op, Group group);
 
