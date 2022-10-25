@@ -36,12 +36,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/emailcheck")
-//  @CrossOrigin(origins = "*", maxAge = 3600)
-    public Map<String, String> emailCheck(@RequestParam String email) throws AuthenticationException {
-
-        return userService.isEmailValid(email);
-    }
 
     @GetMapping(value = "/basic")
 //  @CrossOrigin(origins = "*", maxAge = 3600)

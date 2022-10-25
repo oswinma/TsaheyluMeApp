@@ -2,6 +2,7 @@ package me.tsaheylu.config;
 
 // import my.demo.filters.JwtTokenFilter;
 
+import me.tsaheylu.component.JwtAuthenticationEntryPoint;
 import me.tsaheylu.service.UserService;
 import me.tsaheylu.component.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,38 +62,27 @@ public class JwtTokenConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf()
-                .disable()
+        httpSecurity.csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 // dont authenticate this particular request
-                .authorizeRequests()
-                .antMatchers(
-                        "/api/user/check**",
-                        "/api/user/emailcheck**",
-                        "/swagger**/**",
-                        "/webjars/**",
-                        "/v3/**",
-                        "/doc.html" )
-                .permitAll()
-                .antMatchers(HttpMethod.OPTIONS)
-                .permitAll()
+                .authorizeRequests().antMatchers("/api/auth/**", "/swagger**/**", "/webjars/**", "/v3/**", "/doc.html").permitAll()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 // all other requests need to be authenticated
-                .anyRequest()
-                .authenticated()
-                .and()
+                .anyRequest().authenticated();
 
-                // make sure we use stateless session; session won't be used to
-                // store user's state.
-                //        exceptionHandling()
-                //        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                //        .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // make sure we use stateless session; session won't be used to
+        // store user's state.
+        //        exceptionHandling()
+        //        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+        //        .and()
 
-        httpSecurity.addFilterBefore(
-                authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.headers().cacheControl();
     }
 }
