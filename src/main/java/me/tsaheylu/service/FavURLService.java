@@ -2,6 +2,7 @@ package me.tsaheylu.service;
 
 import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.model.FavURL;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,15 +19,16 @@ public interface FavURLService {
 //
 //  Map<String, Object> getPendingFavurls(Long userids);
 
-    HashMap<String, Object> getFavurlsByStatus(Long toids, String startCursor, int status);
+//    HashMap<String, Object> getFavurlsByStatus(Long toids, String startCursor, int status);
 
-    FavURL getArchive(Long valueOf);
+    HashMap<String, Object> getFavurlsByStatusAndPage(Long toid, int status, int pageIndex, @RequestParam int pageSize);
 
-    FavURL getNew(Long toid);
 
-    HashMap<String, Object> getFav(Long id, String startCursor);
+    HashMap<String, Object> getFavurlsByFavAndPage(Long toid, boolean fav, int pageIndex, @RequestParam int pageSize);
 
-    boolean batchUpdateFavurlStatus(List<FavURL> json);
+//    HashMap<String, Object> getFav(Long id, String startCursor);
+
+//    boolean batchUpdateFavurlStatus(List<FavURL> json);
 
     FavURL save(FavURL favURL);
 

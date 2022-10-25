@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.tsaheylu.DtoMapper.FavURLDtoMapper;
 import me.tsaheylu.common.FavURLStatus;
 import me.tsaheylu.common.response.ResponseResult;
+import me.tsaheylu.dto.ContactDTO;
 import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.User;
@@ -35,42 +36,53 @@ public class FavURLController {
 //  /api/favurl/tryrecieve
 //  /api/favurl/trysend
 
-    @GetMapping(path = "/archive")
-//  @CrossOrigin(origins = "*", maxAge = 3600)
-    public @ResponseBody HashMap<String, Object> getArchive(@RequestParam String startCursor) {
+
+    @GetMapping
+    public @ResponseBody
+    HashMap<String, Object> getFavURLDTOListByStatus(@RequestParam(required = true) int status, @RequestParam(required = true) final int pageIndex, @RequestParam(required = true) final int pageSize) {
         // This returns a JSON or XML with the users
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
-
-        return favurlService.getFavurlsByStatus(user.getId(), startCursor, FavURLStatus.ARCHIVE.getId());
+        return favurlService.getFavurlsByStatusAndPage(user.getId(), status, pageIndex, pageSize);
     }
 
-    @GetMapping(path = "/new")
-//  @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
-    public @ResponseBody HashMap<String, Object> getNew(@RequestParam String startCursor) {
-        // This returns a JSON or XML with the users
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (User) principal;
 
-        return favurlService.getFavurlsByStatus(user.getId(), startCursor, FavURLStatus.NEW.getId());
-    }
+//    @GetMapping(path = "/archive")
+////  @CrossOrigin(origins = "*", maxAge = 3600)
+//    public @ResponseBody HashMap<String, Object> getArchive(@RequestParam String startCursor) {
+//        // This returns a JSON or XML with the users
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = (User) principal;
+//
+//        return favurlService.getFavurlsByStatus(user.getId(), startCursor, FavURLStatus.ARCHIVE.getId());
+//    }
+//
+//    @GetMapping(path = "/new")
+////  @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+//    public @ResponseBody HashMap<String, Object> getNew(@RequestParam String startCursor) {
+//        // This returns a JSON or XML with the users
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = (User) principal;
+//
+//        return favurlService.getFavurlsByStatus(user.getId(), startCursor, FavURLStatus.NEW.getId());
+//    }
 
     @GetMapping(path = "/fav")
-//  @CrossOrigin(origins = "*", maxAge = 3600)
-    public @ResponseBody HashMap<String, Object> getFav(@RequestParam String startCursor) {
+    public @ResponseBody
+    HashMap<String, Object> getFavURLDTOListByFav(@RequestParam(required = true) boolean fav, @RequestParam(required = true) final int pageIndex, @RequestParam(required = true) final int pageSize) {
         // This returns a JSON or XML with the users
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
-
-        return favurlService.getFav(user.getId(), startCursor);
+        return favurlService.getFavurlsByFavAndPage(user.getId(), fav, pageIndex, pageSize);
     }
 
-    @PatchMapping(path = "/status")
+
+/*    @PatchMapping(path = "/status")
     public @ResponseBody boolean updateStatus(@RequestBody List<FavURL> favurls) {
         // This returns a JSON or XML with the users
 
         return favurlService.batchUpdateFavurlStatus(favurls);
-    }
+    }*/
 
     @PatchMapping(path = "/channel")
     public @ResponseBody FavURLDTO updateChannel(@RequestParam(required = true) Long id, @RequestParam(required = true) String channel) {

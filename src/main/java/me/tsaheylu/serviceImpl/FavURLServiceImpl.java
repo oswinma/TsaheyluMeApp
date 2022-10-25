@@ -19,7 +19,11 @@ import me.tsaheylu.util.CommonUtils;
 import me.tsaheylu.util.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -29,7 +33,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FavURLServiceImpl implements FavURLService {
     private static final Logger logger = LoggerFactory.getLogger(WebsocketController.class);
-    private final FavURLDaoMapper favurlDao;
 
     private final FavURLDtoMapper favurlDtoMapper;
 
@@ -41,6 +44,7 @@ public class FavURLServiceImpl implements FavURLService {
 
     private final PushChannelService pushChannelService;
 
+/*
     @Override
     public HashMap<String, Object> getFavurlsByStatus(Long toids, String startCursor, int status) {
         // TODO Auto-generated method stub
@@ -66,19 +70,38 @@ public class FavURLServiceImpl implements FavURLService {
         }
         return null;
     }
+*/
+
 
     @Override
-    public FavURL getArchive(Long toid) {
+    public HashMap<String, Object> getFavurlsByStatusAndPage(Long toid, int status, final int pageIndex, @RequestParam final int pageSize) {
+        // TODO Auto-generated method stub
 
-        return favurlDao.Get(toid);
+        Pageable pageable = PageRequest.of(pageIndex, pageSize);
+        Page<FavURLDTO> pageList = favurlRepo.getDtoListByToidAndStatus(toid, status, pageable);
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("FavurlDtoList", pageList.getContent());
+        data.put("ListSize", pageList.getTotalElements());
+        data.put("pageIndex", pageIndex);
+        data.put("pageSize", pageSize);
+        return (HashMap<String, Object>) data;
     }
 
     @Override
-    public FavURL getNew(Long toid) {
-        return favurlDao.Get(toid);
+    public HashMap<String, Object> getFavurlsByFavAndPage(Long toid, boolean fav, final int pageIndex, @RequestParam final int pageSize) {
+        // TODO Auto-generated method stub
+
+        Pageable pageable = PageRequest.of(pageIndex, pageSize);
+        Page<FavURLDTO> pageList = favurlRepo.getDtoListByToidAndFav(toid, fav, pageable);
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("FavurlDtoList", pageList.getContent());
+        data.put("ListSize", pageList.getTotalElements());
+        data.put("pageIndex", pageIndex);
+        data.put("pageSize", pageSize);
+        return (HashMap<String, Object>) data;
     }
 
-    @Override
+   /* @Override
     public HashMap<String, Object> getFav(Long userid, String startCursor) {
 
         if (userid != null) {
@@ -102,9 +125,9 @@ public class FavURLServiceImpl implements FavURLService {
         }
 
         return null;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public boolean batchUpdateFavurlStatus(List<FavURL> favURLS) {
 
         ArrayList<FavURL> list = new ArrayList<FavURL>();
@@ -114,7 +137,7 @@ public class FavURLServiceImpl implements FavURLService {
             Long id = favURL.getId();
             int status = favURL.getStatus();
 
-            FavURL fu = favurlDao.Get(Long.valueOf(id));
+            FavURL fu = get(Long.valueOf(id));
 
             if (fu != null) {
                 if (status == FavURLStatus.NEW.getId()) {
@@ -138,12 +161,12 @@ public class FavURLServiceImpl implements FavURLService {
             }
 
             if (toid != 0l) {
-                favurlDao.BatchUpdate(list);
+                favurlRepo.saveAll(list);
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     @Override
     public FavURL save(FavURL favURL) {
