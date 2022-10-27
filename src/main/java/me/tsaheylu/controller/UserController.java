@@ -1,6 +1,6 @@
 package me.tsaheylu.controller;
 
-import me.tsaheylu.common.response.ResponseResult;
+import me.tsaheylu.apiResponse.ResponseResult;
 import me.tsaheylu.model.User;
 import me.tsaheylu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

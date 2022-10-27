@@ -1,7 +1,6 @@
-package me.tsaheylu.common.response;
+package me.tsaheylu.apiResponse;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 public class TokenRefreshResponse {

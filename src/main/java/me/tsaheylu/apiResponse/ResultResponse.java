@@ -1,4 +1,4 @@
-package me.tsaheylu.common.response;
+package me.tsaheylu.apiResponse;
 
 public class ResultResponse {
     private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";

@@ -1,4 +1,4 @@
-package me.tsaheylu.common.response;
+package me.tsaheylu.apiResponse;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;

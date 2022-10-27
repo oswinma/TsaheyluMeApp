@@ -76,12 +76,6 @@ public class JwtTokenConfig extends WebSecurityConfigurerAdapter {
                 // all other requests need to be authenticated
                 .anyRequest().authenticated();
 
-        // make sure we use stateless session; session won't be used to
-        // store user's state.
-        //        exceptionHandling()
-        //        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-        //        .and()
-
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.headers().cacheControl();
     }

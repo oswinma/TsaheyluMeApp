@@ -1,29 +1,21 @@
 package me.tsaheylu.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
-import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.FriendStatus;
 import me.tsaheylu.common.MessageType;
 import me.tsaheylu.common.Texts;
-import me.tsaheylu.dao.mapper.FriendDaoMapper;
-import me.tsaheylu.dao.mapper.MessageDaoMapper;
-import me.tsaheylu.dao.mapper.UserDaoMapper;
-import me.tsaheylu.dto.ContactDTO;
 import me.tsaheylu.dto.InvitationDTO;
 import me.tsaheylu.model.Friend;
 import me.tsaheylu.model.Message;
 import me.tsaheylu.model.User;
 import me.tsaheylu.repository.FriendRepo;
 import me.tsaheylu.repository.UserRepo;
-import me.tsaheylu.service.FriendService;
 import me.tsaheylu.service.InvitationService;
 import me.tsaheylu.service.MessageService;
 import me.tsaheylu.util.DateUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service

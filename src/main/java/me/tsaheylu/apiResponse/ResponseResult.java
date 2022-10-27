@@ -1,4 +1,4 @@
-package me.tsaheylu.common.response;
+package me.tsaheylu.apiResponse;
 
 import java.lang.annotation.*;
 

@@ -1,4 +1,4 @@
-package me.tsaheylu.request;
+package me.tsaheylu.apiRequest;
 
 import javax.validation.constraints.NotBlank;
 

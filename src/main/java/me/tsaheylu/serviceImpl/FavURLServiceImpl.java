@@ -7,7 +7,6 @@ import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.FavURLChannel;
 import me.tsaheylu.common.FavURLStatus;
 import me.tsaheylu.controller.WebsocketController;
-import me.tsaheylu.dao.mapper.FavURLDaoMapper;
 import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.Friend;

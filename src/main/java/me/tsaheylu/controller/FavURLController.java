@@ -1,15 +1,10 @@
 package me.tsaheylu.controller;
 
 import lombok.RequiredArgsConstructor;
-import me.tsaheylu.DtoMapper.FavURLDtoMapper;
-import me.tsaheylu.common.FavURLStatus;
-import me.tsaheylu.common.response.ResponseResult;
-import me.tsaheylu.dto.ContactDTO;
+import me.tsaheylu.apiResponse.ResponseResult;
 import me.tsaheylu.dto.FavURLDTO;
 import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.User;
-import me.tsaheylu.repository.FavurlRepo;
-import me.tsaheylu.repository.FriendRepo;
 import me.tsaheylu.service.FavURLService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;

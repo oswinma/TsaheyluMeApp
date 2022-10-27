@@ -1,12 +1,10 @@
 package me.tsaheylu.controller;
 
 import lombok.RequiredArgsConstructor;
-import me.tsaheylu.common.response.ResponseResult;
-import me.tsaheylu.dto.InvitationDTO;
+import me.tsaheylu.apiResponse.ResponseResult;
 import me.tsaheylu.dto.MessageDTO;
 import me.tsaheylu.model.User;
 import me.tsaheylu.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;

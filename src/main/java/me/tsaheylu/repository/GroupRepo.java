@@ -26,5 +26,7 @@ public interface GroupRepo extends CrudRepository<Group, Long> {
             "      order by g.createdTime desc")
     List<GroupDTO> getDtoListById(List<Long> idlist);
 
+    List<Group> findByfromid(Long fromid);
+
 }
 
