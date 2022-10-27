@@ -6,9 +6,11 @@ import me.tsaheylu.dto.MessageNumDTO;
 import me.tsaheylu.model.FavURL;
 import me.tsaheylu.model.Group;
 
+import java.util.Map;
+
 public interface PushChannelService {
 
-    public abstract String setupChannel(Long id);
+    public abstract Map<String, String> setupChannel(Long id);
 
     public abstract void removeGroupsFromChannel(Group group);
 

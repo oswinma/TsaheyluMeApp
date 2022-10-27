@@ -68,25 +68,25 @@ public class PushChannelServiceImpl implements PushChannelService {
     }
 
     @Override
-    public String setupChannel(Long id) {
+    public Map<String, String> setupChannel(Long id) {
         // TODO Auto-generated method stub
 
         initFirebase();
-
         User u = userService.Get(id);
         Date signuptime = u.getSignuptime();
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("signuptime", signuptime);
-
+        Map<String, String> data = new HashMap<String, String>();
         String customToken;
         try {
             customToken = defaultAuth.createCustomToken(id.toString(), claims);
-            return customToken;
+            data.put("channelToken", customToken);
+            return data;
         } catch (FirebaseAuthException e) {
             // TODO Auto-generated catch block
         }
 
-        return null;
+        return data;
     }
 
     @Override
