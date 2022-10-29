@@ -108,6 +108,12 @@
             <version>9.1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+
+
         <!--
                 &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-api &ndash;&gt;
                 <dependency>

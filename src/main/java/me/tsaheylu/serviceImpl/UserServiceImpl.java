@@ -4,8 +4,12 @@ import io.sentry.spring.tracing.SentrySpan;
 import lombok.RequiredArgsConstructor;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
+import me.tsaheylu.component.JwtUtil;
+import me.tsaheylu.model.CustomOAuth2User;
+import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
 import me.tsaheylu.repository.UserRepo;
+import me.tsaheylu.service.RefreshTokenService;
 import me.tsaheylu.service.UserService;
 import me.tsaheylu.util.CommonUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,10 +26,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    //  @Autowired private JwtTokenComponent jwtTokenComponent;
-    //  @Autowired private AuthenticationManager authenticationManager;
-
-
+    private final JwtUtil jwtUtil;
+    private final RefreshTokenService refreshTokenService;
     private final UserRepo userRepo;
 
     @Override
@@ -124,5 +128,33 @@ public class UserServiceImpl implements UserService {
     @Override
     public User Get(Long id) {
         return userRepo.findById(id).get();
+    }
+
+    @Override
+    public void processOAuthLogin(CustomOAuth2User oAuth2User, HttpServletResponse response) {
+
+
+        User user = userRepo.findByEmail(oAuth2User.getEmail());
+        if (user == null) {
+            user = new User();
+            user.setEmail(oAuth2User.getEmail());
+            user.setStatus(1);
+            userRepo.save(user);
+            try {
+                response.sendRedirect("/signup");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            UserDetails userDetails = user;
+            String accessToken = jwtUtil.generateToken(userDetails);
+            RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+            try {
+                response.sendRedirect("/mylist/new?accessToken=" + accessToken + "&refreshToken=" + refreshToken.getToken());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 }

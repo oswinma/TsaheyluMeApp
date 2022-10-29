@@ -22,64 +22,6 @@ public class Constants {
 
   public static final String ENCODE_METHOD = "MD5";
 
-  public static final String DEFAULT_EMAIL_FROM = "support@tsahaylu.com";
-
-  public static final String TWITTER_API_KEY = "Jwp7H6jf5pS61Dsx28Uxg";
-  public static final String TWITTER_API_SECRET = "G0KV7prWD7U1fierlXooZVGnMpmHSj1Y6b85B88";
-
-  public static final String FACEBOOK_API_KEY = "141416579340734";
-  public static final String FACEBOOK_API_SECRET = "081cbda671968b5c7aeec24ed007cceb";
-
-  public static final String FACEBOOK_API_KEY_TEST = "812771222205263";
-  public static final String FACEBOOK_API_SECRET_TEST = "bd7e829c829e421ab348b6f271374ab2";
-
-  public static final String GOOGLE_API_KEY_TEST =
-      "920446357904-8ejcev21hac9kffaurtd64i9d1lim0dl.apps.googleusercontent.com";
-  public static final String GOOGLE_API_SECRET_TEST = "piYHrnJ3IAW-MyyEapjsKCCG";
-
-  public static final String GOOGLE_API_KEY =
-      "920446357904-l4151jjr757mkpi6sq47okocgtkg7t88.apps.googleusercontent.com";
-  public static final String GOOGLE_API_SECRET = "1fkdMpDB4vXW0FT_GHFNt5Lo";
-
-  public static final String googleOAuthReturnUrlPrd =
-      "https://tsahaylu.com/api/service/googleOAuth?is_return=true";
-  public static final String googleOAuthReturnUrlDev =
-      "http://localhost/api/service/googleOAuth?is_return=true";
-
-  public static final String twitterOAuthReturnUrlPrd =
-      "https://tsahaylu.com/api/service/twitterOAuth?is_return=true";
-
-  public static final String facebookOAuthReturnUrlPrd =
-      "https://tsahaylu.com/api/service/facebookOAuth?is_return=true";
-  public static final String facebookOAuthReturnUrlDev =
-      "http://localhost/api/service/facebookOAuth?is_return=true";
-
-  public static final String twitterOAuthUserInfoResourceURL =
-      "https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true&include_entities=false&skip_status=true";
-  public static final String TWITTER_FRIENDS_LINK =
-      "https://api.twitter.com/1.1/friends/list.json?count=200&include_user_entities=false&skip_status=true";
-
-  public static final String facebookOAuthUserInfoResourceURL =
-      "https://graph.facebook.com/v3.2/me?fields=email,first_name,picture.type(large)";
-  public static final String FACEBOOK_FRIENDS_LINK = "https://graph.facebook.com/v3.2/";
-
-  //    public static String googleOAuthScope = "email
-  // https://www.googleapis.com/auth/contacts.readonly";
-  public static String googleOAuthScope = "https://www.googleapis.com/auth/contacts.readonly";
-  public static final String googleOAuthUserInfoResourceURL =
-      //                  "https://www.googleapis.com/auth/userinfo.profile";
-      "https://www.googleapis.com/oauth2/v2/userinfo";
-  //            "https://www.googleapis.com/plus/v1/people/me";
-  public static final String GOOGLE_CONTACT_LINK =
-      "https://www.google.com/m8/feeds/contacts/default/full?alt=json&max-results=100";
-
-  public static String openidProviderFacebook = "facebook";
-  public static String openidProviderGoogle = "google";
-  public static String openidProviderTwitter = "twitter";
-
-  public static String OAuthContactReturnUrlPrd = "https://tsahaylu.com/OpenidReturn.html";
-  public static String OAuthContactReturnUrlDev = "http://127.0.0.1/OpenidReturn.html";
-
   public static final String PAGE_TEMPLATE_EMAILCONFIRM = "EmailConfirmation.html";
   public static final String PAGE_TEMPLATE_PASSRESET = "ForgotPass.html";
   public static final String PAGE_TEMPLATE_INVITATION = "Invitation.html";

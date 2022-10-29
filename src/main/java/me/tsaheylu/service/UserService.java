@@ -4,9 +4,11 @@ package me.tsaheylu.service;
 // import com.github.scribejava.core.model.OAuth2AccessToken;
 // import com.github.scribejava.core.oauth.OAuth10aService;
 // import com.github.scribejava.core.oauth.OAuth20Service;
+import me.tsaheylu.model.CustomOAuth2User;
 import me.tsaheylu.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public interface UserService extends UserDetailsService {
@@ -19,7 +21,9 @@ public interface UserService extends UserDetailsService {
 
   User Get(Long id);
 
-  //  public abstract String getAvatar(String id);
+    void processOAuthLogin(CustomOAuth2User principal, HttpServletResponse response);
+
+    //  public abstract String getAvatar(String id);
   //
   //  public abstract UserDTO conUserToUserDTO(User u);
   //

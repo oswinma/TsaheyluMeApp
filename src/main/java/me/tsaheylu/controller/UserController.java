@@ -5,6 +5,8 @@ import me.tsaheylu.model.User;
 import me.tsaheylu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,4 +58,8 @@ public class UserController {
         return data;
     }
 
+    @GetMapping("/me")
+    public Map<String, Object> userDetails(@AuthenticationPrincipal OAuth2User user) {
+        return user.getAttributes();
+    }
 }
