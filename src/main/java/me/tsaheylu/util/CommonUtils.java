@@ -1,10 +1,13 @@
 package me.tsaheylu.util;
 
 import me.tsaheylu.common.Constants;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -102,5 +105,12 @@ public class CommonUtils {
         Pattern p = Pattern.compile(Constants.EMAILADDPATTERN);
         Matcher m = p.matcher(email);
         return m.find();
+    }
+
+    public static List<SimpleGrantedAuthority> buildSimpleGrantedAuthorities(final String role) {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        authorities.add(new SimpleGrantedAuthority(role));
+        return authorities;
     }
 }
