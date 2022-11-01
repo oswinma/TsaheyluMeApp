@@ -44,17 +44,14 @@ public class User implements UserDetails, Serializable {
     @Column(name = "avatarURL")
     private String avatarURL;
 
-    @Column(name = "code")
-    private String code;
-
     @Column(name = "status")
     private int status = UserStatus.INVALID.getId();
 
     @Column(name = "createdTime")
-    private Timestamp createdTime;
+    private Date createdTime;
 
-    @Column(name = "signuptime")
-    private Timestamp signuptime;
+    @Column(name = "lastModifiedTime")
+    private Date lastModifiedTime;
 
     @Column(name = "favurlSubscription")
     private boolean favurlSubscription = true;

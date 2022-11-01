@@ -1,6 +1,8 @@
 package me.tsaheylu.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.common.TokenType;
+import me.tsaheylu.exception.EmailVefifyException;
 import me.tsaheylu.exception.TokenRefreshException;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
@@ -36,13 +38,13 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     }
 
     @Override
-    public RefreshToken createRefreshToken(User user) {
+    public RefreshToken createRefreshToken(User user, TokenType tokenType) {
         RefreshToken refreshToken = new RefreshToken();
 
         refreshToken.setUser(user);
         refreshToken.setExpiryDate(Instant.now().plusMillis(jwtRefreshExpirationMs));
         refreshToken.setToken(UUID.randomUUID().toString());
-
+        refreshToken.setType(tokenType.getId());
         refreshToken = refreshTokenRepo.save(refreshToken);
         return refreshToken;
     }
@@ -52,7 +54,13 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepo.delete(token);
             logger.debug("Refresh token was expired", token);
-            throw new TokenRefreshException(token.getToken(), "Refresh token was expired. Please make a new signin request");
+            if (token.getType() == TokenType.AUTH.getId()) {
+                throw new TokenRefreshException(token.getToken(), "Refresh token was expired. Please make a new signin request");
+            }
+
+            if (token.getType() == TokenType.VERIFY.getId()) {
+                throw new EmailVefifyException(token.getToken(), "token was expired. Please make a new verify request");
+            }
         }
 
         return token;

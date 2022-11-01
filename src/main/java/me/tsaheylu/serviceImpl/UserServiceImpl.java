@@ -2,18 +2,20 @@ package me.tsaheylu.serviceImpl;
 
 import io.sentry.spring.tracing.SentrySpan;
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.apiRequest.SignUpRequest;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
-import me.tsaheylu.component.JwtAuthenticationEntryPoint;
-import me.tsaheylu.component.JwtUtil;
+import me.tsaheylu.common.UserStatus;
+import me.tsaheylu.exception.EmailVefifyException;
 import me.tsaheylu.exception.OAuth2AuthenticationProcessingException;
+import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
 import me.tsaheylu.model.LocalUser;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
 import me.tsaheylu.repository.UserRepo;
 import me.tsaheylu.security.oauth2.user.OAuth2UserInfo;
 import me.tsaheylu.security.oauth2.user.OAuth2UserInfoFactory;
-import me.tsaheylu.service.RefreshTokenService;
+import me.tsaheylu.service.EmailService;
 import me.tsaheylu.service.UserService;
 import me.tsaheylu.util.CommonUtils;
 import org.slf4j.Logger;
@@ -21,21 +23,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +42,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final PasswordEncoder passwordEncoder;
 
+    private final EmailService emailService;
+
+    private final RefreshTokenServiceImpl refreshTokenService;
 
     @Override
     @SentrySpan
@@ -163,6 +163,40 @@ public class UserServiceImpl implements UserService {
 
         }
 
-        return LocalUser.create(user, attributes, idToken, userInfo,oAuth2UserInfo);
+        return LocalUser.create(user, attributes, idToken, userInfo, oAuth2UserInfo);
+    }
+
+    @Override
+    public User registerNewUser(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
+        String email = signUpRequest.getEmail();
+        if (userRepo.findByEmail(email) != null) {
+            throw new UserAlreadyExistAuthenticationException("User with email id " + signUpRequest.getEmail() + " already exist");
+        }
+
+        User user = new User();
+        Date now = Calendar.getInstance().getTime();
+        user.setEmail(email);
+        user.setNickname(signUpRequest.getNickName());
+        user.setCreatedTime(now);
+        user.setLastModifiedTime(now);
+        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+        user = userRepo.save(user);
+
+        emailService.sendEmailVerificationEmail(user);
+        return user;
+    }
+
+    @Override
+    public void verifyEmail(String token) throws EmailVefifyException {
+
+        RefreshToken refreshToken = refreshTokenService.findByToken(token).orElseThrow(() -> new EmailVefifyException(token, "Invalid token"));
+        refreshTokenService.verifyExpiration(refreshToken);
+
+        User user = refreshToken.getUser();
+        if (user == null) {
+            throw new EmailVefifyException(token, "User not found with token " + token);
+        }
+        user.setStatus(UserStatus.VALID.getId());
+        userRepo.save(user);
     }
 }

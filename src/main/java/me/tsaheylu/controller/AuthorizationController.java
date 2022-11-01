@@ -2,11 +2,16 @@ package me.tsaheylu.controller;
 
 import io.sentry.Sentry;
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.apiRequest.SignUpRequest;
+import me.tsaheylu.apiResponse.DefaultResponse;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
 import me.tsaheylu.apiResponse.TokenRefreshResponse;
+import me.tsaheylu.common.TokenType;
 import me.tsaheylu.component.JwtUtil;
+import me.tsaheylu.exception.EmailVefifyException;
 import me.tsaheylu.exception.TokenRefreshException;
+import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
 import me.tsaheylu.apiRequest.RefreshTokenRequest;
@@ -14,14 +19,13 @@ import me.tsaheylu.service.RefreshTokenService;
 import me.tsaheylu.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.sasl.AuthenticationException;
@@ -73,7 +77,7 @@ public class AuthorizationController {
                 User user = (User) authentication.getPrincipal();
                 UserDetails userDetails = userService.loadUserByUsername(email);
                 String token = jwtUtil.generateToken(userDetails);
-                RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+                RefreshToken refreshToken = refreshTokenService.createRefreshToken(user, TokenType.AUTH);
 
                 data.put("pass", Constants.RETURN_SUCCESS);
                 data.put("msg", Texts.MESSAGE_PASS_VALIDATE);
@@ -117,5 +121,33 @@ public class AuthorizationController {
     public Map<String, String> emailCheck(@RequestParam String email) throws AuthenticationException {
 
         return userService.isEmailValid(email);
+    }
+
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+        try {
+            userService.registerNewUser(signUpRequest);
+        } catch (UserAlreadyExistAuthenticationException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok().body(new DefaultResponse(true, "User registered successfully"));
+
+    }
+
+
+    @PostMapping(value = "/verifyEmail")
+//  @CrossOrigin(origins = "*", maxAge = 3600)
+    public ResponseEntity<?> verifyEmail(@RequestParam String token) throws AuthenticationException {
+
+        try {
+            userService.verifyEmail(token);
+        } catch (EmailVefifyException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "EmailVefifyException"), HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok().body(new DefaultResponse(true, "email verified successfully"));
+
     }
 }

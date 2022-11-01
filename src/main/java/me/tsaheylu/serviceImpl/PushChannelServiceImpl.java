@@ -73,7 +73,7 @@ public class PushChannelServiceImpl implements PushChannelService {
 
         initFirebase();
         User u = userService.Get(id);
-        Date signuptime = u.getSignuptime();
+        Date signuptime = u.getCreatedTime();
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("signuptime", signuptime);
         Map<String, String> data = new HashMap<String, String>();

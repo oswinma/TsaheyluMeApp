@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.common.TokenType;
 import me.tsaheylu.component.JwtUtil;
 import me.tsaheylu.model.LocalUser;
 import me.tsaheylu.model.RefreshToken;
@@ -75,7 +76,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         } else {
             UserDetails userDetails = user;
             String accessToken = jwtUtil.generateToken(userDetails);
-            RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+            RefreshToken refreshToken = refreshTokenService.createRefreshToken(user, TokenType.AUTH);
 
             targetUrl = UriComponentsBuilder.fromUriString(redirectUrl + "/login").queryParam("accessToken", accessToken).queryParam("refreshToken", refreshToken.getToken()).build().toUriString();
         }

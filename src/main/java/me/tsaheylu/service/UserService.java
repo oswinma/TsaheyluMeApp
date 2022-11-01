@@ -4,15 +4,13 @@ package me.tsaheylu.service;
 // import com.github.scribejava.core.model.OAuth2AccessToken;
 // import com.github.scribejava.core.oauth.OAuth10aService;
 // import com.github.scribejava.core.oauth.OAuth20Service;
+import me.tsaheylu.apiRequest.SignUpRequest;
 import me.tsaheylu.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public interface UserService extends UserDetailsService {
@@ -27,8 +25,12 @@ public interface UserService extends UserDetailsService {
 
   OidcUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
 
+    User registerNewUser(SignUpRequest signUpRequest);
 
-  //  public abstract String getAvatar(String id);
+    void verifyEmail(String token);
+
+
+    //  public abstract String getAvatar(String id);
   //
   //  public abstract UserDTO conUserToUserDTO(User u);
   //
