@@ -149,7 +149,7 @@ public class MessageServiceImpl implements MessageService {
         m.setFromid(fromid);
         m.setToid(toid);
         m.setType(MessageType.FAVURL.getType());
-        m.setContent(u.getNickname() + Texts.MESSAGE_CONTENT_FAVURL);
+        m.setContent(u.getNickName() + Texts.MESSAGE_CONTENT_FAVURL);
         m.setSendtime(favURL.getSendtime());
         m.setRefid(favURL.getId());
         return m;

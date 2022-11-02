@@ -57,7 +57,7 @@ public class InvitationServiceImpl implements InvitationService {
                 f = friendRepo.save(f);
             }
 
-            Message m = new Message(fromid, toid, MessageType.INVITATION.name(), fromUser.getNickname() + Texts.MESSAGE_CONTENT_INVITEFRIEND, f.getId());
+            Message m = new Message(fromid, toid, MessageType.INVITATION.name(), fromUser.getNickName() + Texts.MESSAGE_CONTENT_INVITEFRIEND, f.getId());
             messageService.createMessage(m);
 
             invitationDTO.setId(f.getId());

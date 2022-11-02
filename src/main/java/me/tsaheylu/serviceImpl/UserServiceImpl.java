@@ -6,9 +6,7 @@ import me.tsaheylu.apiRequest.SignUpRequest;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
 import me.tsaheylu.common.UserStatus;
-import me.tsaheylu.exception.EmailVefifyException;
-import me.tsaheylu.exception.OAuth2AuthenticationProcessingException;
-import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
+import me.tsaheylu.exception.*;
 import me.tsaheylu.model.LocalUser;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
@@ -30,10 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -176,7 +171,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         Date now = Calendar.getInstance().getTime();
         user.setEmail(email);
-        user.setNickname(signUpRequest.getNickName());
+        user.setNickName(signUpRequest.getNickName());
         user.setCreatedTime(now);
         user.setLastModifiedTime(now);
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
@@ -187,16 +182,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void verifyEmail(String token) throws EmailVefifyException {
+    public void verifyToken(String token) throws TokenInvalidException {
 
-        RefreshToken refreshToken = refreshTokenService.findByToken(token).orElseThrow(() -> new EmailVefifyException(token, "Invalid token"));
+        RefreshToken refreshToken = refreshTokenService.findByToken(token).orElseThrow(() -> new TokenInvalidException(token, "token not found"));
         refreshTokenService.verifyExpiration(refreshToken);
 
         User user = refreshToken.getUser();
         if (user == null) {
-            throw new EmailVefifyException(token, "User not found with token " + token);
+            throw new TokenInvalidException(token, "User not found with token");
         }
         user.setStatus(UserStatus.VALID.getId());
         userRepo.save(user);
+    }
+
+    @Override
+    public void resendToken(String existingVerificationToken) throws TokenInvalidException {
+
+        Optional<RefreshToken> optionalRefreshToken = refreshTokenService.findByToken(existingVerificationToken);
+        if (optionalRefreshToken.isPresent()) {
+            RefreshToken refreshToken = optionalRefreshToken.get();
+            refreshToken = refreshTokenService.updateToken(refreshToken);
+            emailService.sendEmailVerificationEmail(refreshToken.getUser());
+        } else {
+            throw new TokenInvalidException(existingVerificationToken, "token not found");
+        }
     }
 }

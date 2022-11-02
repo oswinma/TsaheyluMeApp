@@ -3,7 +3,7 @@
   <title>Hello world!</title>
 </head>
 <body>
-  <h1>Hello</h1>
+  <h1>${user.nickName}</h1>
   <p>Email Verification link ${url}</p>
  </body>
 </html>

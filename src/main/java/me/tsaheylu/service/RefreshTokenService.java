@@ -16,4 +16,6 @@ public interface RefreshTokenService {
 
     @Transactional
     int deleteByUserId(Long userId);
+
+    RefreshToken updateToken(RefreshToken refreshToken);
 }

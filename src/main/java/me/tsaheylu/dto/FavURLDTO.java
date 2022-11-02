@@ -72,7 +72,7 @@ public class FavURLDTO {
         this.title = ui.getTitle();
         this.icon = ui.getIcon();
         this.host = ui.getHost();
-        this.nickname = u.getNickname();
+        this.nickname = u.getNickName();
         this.avatarURL = u.getAvatarURL();
         this.readtime = fu.getReadtime();
         this.share = ui.getShare();

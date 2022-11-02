@@ -2,19 +2,19 @@ package me.tsaheylu.controller;
 
 import io.sentry.Sentry;
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.apiRequest.RefreshTokenRequest;
 import me.tsaheylu.apiRequest.SignUpRequest;
 import me.tsaheylu.apiResponse.DefaultResponse;
+import me.tsaheylu.apiResponse.TokenRefreshResponse;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
-import me.tsaheylu.apiResponse.TokenRefreshResponse;
 import me.tsaheylu.common.TokenType;
 import me.tsaheylu.component.JwtUtil;
-import me.tsaheylu.exception.EmailVefifyException;
-import me.tsaheylu.exception.TokenRefreshException;
+import me.tsaheylu.exception.TokenExpiredException;
+import me.tsaheylu.exception.TokenInvalidException;
 import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
-import me.tsaheylu.apiRequest.RefreshTokenRequest;
 import me.tsaheylu.service.RefreshTokenService;
 import me.tsaheylu.service.UserService;
 import org.slf4j.Logger;
@@ -60,15 +60,13 @@ public class AuthorizationController {
 
     @PostMapping(value = "/check")
 //  @CrossOrigin(origins = "*", maxAge = 3600)
-    public Map<String, String> login(@RequestParam String email, @RequestParam String password)
-            throws AuthenticationException {
+    public Map<String, String> login(@RequestParam String email, @RequestParam String password) throws AuthenticationException {
 
         Map<String, String> data = userService.checkUser(email, password);
 
         if (data.get("pass") == "waiting for validate") {
 
-            UsernamePasswordAuthenticationToken authenticationToken =
-                    new UsernamePasswordAuthenticationToken(email, password);
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
@@ -104,16 +102,11 @@ public class AuthorizationController {
     public ResponseEntity<?> refreshtoken(@Valid @RequestBody RefreshTokenRequest request) {
         String requestRefreshToken = request.getRefreshToken();
 
-        return refreshTokenService.findByToken(requestRefreshToken)
-                .map(refreshTokenService::verifyExpiration)
-                .map(RefreshToken::getUser)
-                .map(user -> {
-                    String token = jwtUtil.generateToken(user);
-                    logger.debug("new accessToken", token);
-                    return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
-                })
-                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
-                        "Refresh token is not in database!"));
+        return refreshTokenService.findByToken(requestRefreshToken).map(refreshTokenService::verifyExpiration).map(RefreshToken::getUser).map(user -> {
+            String token = jwtUtil.generateToken(user);
+            logger.debug("new accessToken", token);
+            return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
+        }).orElseThrow(() -> new TokenInvalidException(requestRefreshToken, "Refresh token is not in database!"));
     }
 
     @PostMapping(value = "/emailcheck")
@@ -137,17 +130,34 @@ public class AuthorizationController {
     }
 
 
-    @PostMapping(value = "/verifyEmail")
+    @PostMapping(value = "/verify")
 //  @CrossOrigin(origins = "*", maxAge = 3600)
-    public ResponseEntity<?> verifyEmail(@RequestParam String token) throws AuthenticationException {
+    public ResponseEntity<?> verifyToken(@RequestParam String token) throws AuthenticationException {
 
         try {
-            userService.verifyEmail(token);
-        } catch (EmailVefifyException e) {
+            userService.verifyToken(token);
+        } catch (TokenInvalidException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "TokenInvalidException"), HttpStatus.BAD_REQUEST);
+        } catch (TokenExpiredException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "TokenExpiredException"), HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok().body(new DefaultResponse(true, "email verified successfully"));
+
+    }
+
+    @PostMapping(value = "/resend")
+//  @CrossOrigin(origins = "*", maxAge = 3600)
+    public ResponseEntity<?> resendToken(@RequestParam String token) throws AuthenticationException {
+
+        try {
+            userService.resendToken(token);
+        } catch (TokenInvalidException e) {
             logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "EmailVefifyException"), HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok().body(new DefaultResponse(true, "email verified successfully"));
+        return ResponseEntity.ok().body(new DefaultResponse(true, "new token sent successfully"));
 
     }
 }

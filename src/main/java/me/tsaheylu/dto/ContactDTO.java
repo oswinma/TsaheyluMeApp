@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import me.tsaheylu.model.Friend;
 import me.tsaheylu.model.User;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -36,14 +35,14 @@ public class ContactDTO {
 
     public ContactDTO(User u) {
         this.id = String.valueOf(u.getId());
-        this.nickname = u.getNickname();
+        this.nickname = u.getNickName();
         this.avatarURL = u.getAvatarURL();
         this.email = u.getEmail();
     }
 
     public ContactDTO(User u, Friend f) {
         this.id = String.valueOf(u.getId());
-        this.nickname = u.getNickname();
+        this.nickname = u.getNickName();
         this.avatarURL = u.getAvatarURL();
         this.friendid = f.getId();
         this.fromid = f.getFromid();

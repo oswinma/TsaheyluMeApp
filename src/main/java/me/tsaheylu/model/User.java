@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
@@ -33,7 +32,7 @@ public class User implements UserDetails, Serializable {
     private String password;
 
     @Column(name = "nickname")
-    private String nickname;
+    private String nickName;
 
     @Column(name = "country")
     private String country;

@@ -31,13 +31,11 @@ public class MessageDTO {
     public MessageDTO(Message m, User u) {
         this.id = m.getId();
         this.fromid = m.getFromid();
-        m.getFromid();
         this.toid = m.getToid();
         this.type = m.getType();
         this.content = m.getContent();
         this.status = m.getStatus();
-        this.nickname = u.getNickname();
-        u.getNickname();
+        this.nickname = u.getNickName();
         this.avatarURL = u.getAvatarURL();
         this.sendtime = m.getSendtime();
         this.readtime = m.getReadtime();

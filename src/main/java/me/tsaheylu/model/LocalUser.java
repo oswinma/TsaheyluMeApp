@@ -1,9 +1,5 @@
 package me.tsaheylu.model;
 
-import java.util.Collection;
-import java.util.Map;
-
-import lombok.Data;
 import me.tsaheylu.security.oauth2.user.OAuth2UserInfo;
 import me.tsaheylu.util.CommonUtils;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +8,9 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+
+import java.util.Collection;
+import java.util.Map;
 
 
 public class LocalUser extends User implements OAuth2User, OidcUser {
@@ -65,7 +64,7 @@ public class LocalUser extends User implements OAuth2User, OidcUser {
 
     @Override
     public String getName() {
-        return this.user.getNickname();
+        return this.user.getNickName();
     }
 
     @Override

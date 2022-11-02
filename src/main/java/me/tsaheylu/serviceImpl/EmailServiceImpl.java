@@ -32,8 +32,8 @@ public class EmailServiceImpl implements EmailService {
     @Value("${spring.mail.default-from}")
     private String from;
 
-    @Value("${baseUrl}")
-    private String baseUrl;
+    @Value("${tsahayluMe.app.frontendUrl}")
+    private String frontendUrl;
     private final RefreshTokenServiceImpl refreshTokenService;
 
     @Override
@@ -60,7 +60,7 @@ public class EmailServiceImpl implements EmailService {
 
             Template template = freeMarkerConfigurer.getConfiguration().getTemplate(templateName);
             String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, data);
-            helper.setText(text);
+            helper.setText(text, true);
             mailSender.send(message);
         } catch (Exception ex) {
             logger.error("Failed to send email to. error={}", ex.getMessage());
@@ -73,8 +73,10 @@ public class EmailServiceImpl implements EmailService {
         String subject = "Email verification";
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user, TokenType.VERIFY);
         HashMap<String, Object> data = new HashMap<>();
-        String url = baseUrl + "/api/auth/verifyEmail?token=" + refreshToken.getToken();
+        String url = frontendUrl + "/verify?token=" + refreshToken.getToken();
         data.put("url", url);
+        data.put("user", user);
         sendWithTemplate(user.getEmail(), subject, "emailVerificationRequired.flt", data);
+        logger.info("Email verification email sent to {}", user.getEmail());
     }
 }

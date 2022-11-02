@@ -33,9 +33,9 @@ public class CommentDTO {
         this.favurlid = com.getFavurlid();
         this.sendtime = com.getSendtime();
         this.content = com.getContent();
-        this.nickname = u.getNickname();
+        this.nickname = u.getNickName();
         this.avatarURL = u.getAvatarURL();
-        this.tonickname = tu.getNickname();
+        this.tonickname = tu.getNickName();
     }
 
     public CommentDTO(Comment com, User u) {
@@ -46,7 +46,7 @@ public class CommentDTO {
         this.favurlid = com.getFavurlid();
         this.sendtime = com.getSendtime();
         this.content = com.getContent();
-        this.nickname = u.getNickname();
+        this.nickname = u.getNickName();
         this.avatarURL = u.getAvatarURL();
     }
 }

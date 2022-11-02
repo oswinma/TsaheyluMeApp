@@ -43,7 +43,7 @@ public class FriendServiceImpl implements FriendService {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("id", Constants.TsahayluTeamID);
         data.put("avatarURL", u.getAvatarURL());
-        data.put("nickname", u.getNickname());
+        data.put("nickname", u.getNickName());
         data.put("status", f.getStatus());
         data.put("popup", f.isPopup());
         data.put("friendid", f.getId());
@@ -103,7 +103,7 @@ public class FriendServiceImpl implements FriendService {
                 friendRepo.save(f);
             }
 
-            Message m = new Message(fromid, toid, MessageType.INVITATION.getType(), fu.getNickname() + Texts.MESSAGE_CONTENT_INVITEFRIEND, f.getId());
+            Message m = new Message(fromid, toid, MessageType.INVITATION.getType(), fu.getNickName() + Texts.MESSAGE_CONTENT_INVITEFRIEND, f.getId());
             messageService.saveEntity(m);
 
 //            messageservice.updateMsgNumToChannel(m.getToid());

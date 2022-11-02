@@ -2,8 +2,7 @@ package me.tsaheylu.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
 import me.tsaheylu.common.TokenType;
-import me.tsaheylu.exception.EmailVefifyException;
-import me.tsaheylu.exception.TokenRefreshException;
+import me.tsaheylu.exception.TokenExpiredException;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
 import me.tsaheylu.repository.RefreshTokenRepo;
@@ -50,17 +49,11 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     }
 
     @Override
-    public RefreshToken verifyExpiration(RefreshToken token) {
+    public RefreshToken verifyExpiration(RefreshToken token) throws TokenExpiredException {
         if (token.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepo.delete(token);
             logger.debug("Refresh token was expired", token);
-            if (token.getType() == TokenType.AUTH.getId()) {
-                throw new TokenRefreshException(token.getToken(), "Refresh token was expired. Please make a new signin request");
-            }
-
-            if (token.getType() == TokenType.VERIFY.getId()) {
-                throw new EmailVefifyException(token.getToken(), "token was expired. Please make a new verify request");
-            }
+            throw new TokenExpiredException(token.getToken(), "token was expired. Please make a new verify request");
         }
 
         return token;
@@ -70,5 +63,14 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     public int deleteByUserId(Long userId) {
         return refreshTokenRepo.deleteByUser(userRepo.findById(userId).get());
+    }
+
+    @Override
+    public RefreshToken updateToken(RefreshToken refreshToken) {
+        refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setExpiryDate(Instant.now().plusMillis(jwtRefreshExpirationMs));
+        refreshToken = refreshTokenRepo.save(refreshToken);
+
+        return refreshToken;
     }
 }

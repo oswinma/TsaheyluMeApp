@@ -28,7 +28,7 @@ public class InvitationDTO {
         this.toid = f.getToid();
         this.status = f.getStatus();
         this.setPopup(f.isPopup());
-        this.nickname = u.getNickname();
+        this.nickname = u.getNickName();
         this.avatarURL = u.getAvatarURL();
         this.bondtime = f.getBondtime();
     }
