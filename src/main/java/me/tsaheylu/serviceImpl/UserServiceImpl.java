@@ -2,11 +2,16 @@ package me.tsaheylu.serviceImpl;
 
 import io.sentry.spring.tracing.SentrySpan;
 import lombok.RequiredArgsConstructor;
+import me.tsaheylu.apiRequest.ResetPasswordRequest;
 import me.tsaheylu.apiRequest.SignUpRequest;
+import me.tsaheylu.apiRequest.UpdatePasswordRequest;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
 import me.tsaheylu.common.UserStatus;
-import me.tsaheylu.exception.*;
+import me.tsaheylu.exception.OAuth2AuthenticationProcessingException;
+import me.tsaheylu.exception.TokenInvalidException;
+import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
+import me.tsaheylu.exception.UserNotFoundException;
 import me.tsaheylu.model.LocalUser;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
@@ -182,7 +187,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void verifyToken(String token) throws TokenInvalidException {
+
+        RefreshToken refreshToken = refreshTokenService.findByToken(token).orElseThrow(() -> new TokenInvalidException(token, "token not found"));
+        refreshTokenService.verifyExpiration(refreshToken);
+
+        User user = refreshToken.getUser();
+        if (user == null) {
+            throw new TokenInvalidException(token, "User not found with token");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void verifyEmail(String token) throws TokenInvalidException {
 
         RefreshToken refreshToken = refreshTokenService.findByToken(token).orElseThrow(() -> new TokenInvalidException(token, "token not found"));
         refreshTokenService.verifyExpiration(refreshToken);
@@ -193,6 +212,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setStatus(UserStatus.VALID.getId());
         userRepo.save(user);
+        refreshTokenService.delete(refreshToken);
     }
 
     @Override
@@ -205,6 +225,37 @@ public class UserServiceImpl implements UserService {
             emailService.sendEmailVerificationEmail(refreshToken.getUser());
         } else {
             throw new TokenInvalidException(existingVerificationToken, "token not found");
+        }
+    }
+
+    @Override
+    public void resetPassword(ResetPasswordRequest resetPasswordRequest) throws UserNotFoundException {
+        String email = resetPasswordRequest.getEmail();
+        User user = userRepo.findByEmail(email);
+        if (user == null) {
+            throw new UserNotFoundException(email, "User not found with email");
+        } else {
+            emailService.sendResetPasswordEmail(user);
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public void updatePassword(UpdatePasswordRequest updatePasswordRequest) throws TokenInvalidException {
+
+        String token = updatePasswordRequest.getToken();
+        String password = updatePasswordRequest.getPassword();
+        RefreshToken refreshToken = refreshTokenService.findByToken(token).orElseThrow(() -> new TokenInvalidException(token, "token not found"));
+        refreshTokenService.verifyExpiration(refreshToken);
+
+        User user = refreshToken.getUser();
+        if (user == null) {
+            throw new TokenInvalidException(token, "User not found with token");
+        } else {
+            user.setPassword(passwordEncoder.encode(updatePasswordRequest.getPassword()));
+            userRepo.save(user);
+            refreshTokenService.delete(refreshToken);
         }
     }
 }

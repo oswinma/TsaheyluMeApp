@@ -79,4 +79,18 @@ public class EmailServiceImpl implements EmailService {
         sendWithTemplate(user.getEmail(), subject, "emailVerificationRequired.flt", data);
         logger.info("Email verification email sent to {}", user.getEmail());
     }
+
+
+    @Override
+    @Async
+    public void sendResetPasswordEmail(User user) {
+        String subject = "Reset Password";
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user, TokenType.VERIFY);
+        HashMap<String, Object> data = new HashMap<>();
+        String url = frontendUrl + "/resetPassword?token=" + refreshToken.getToken();
+        data.put("url", url);
+        data.put("user", user);
+        sendWithTemplate(user.getEmail(), subject, "emailVerificationRequired.flt", data);
+        logger.info("Password reset email sent to {}", user.getEmail());
+    }
 }

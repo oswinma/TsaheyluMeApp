@@ -5,7 +5,9 @@ package me.tsaheylu.service;
 // import com.github.scribejava.core.oauth.OAuth10aService;
 // import com.github.scribejava.core.oauth.OAuth20Service;
 
+import me.tsaheylu.apiRequest.ResetPasswordRequest;
 import me.tsaheylu.apiRequest.SignUpRequest;
+import me.tsaheylu.apiRequest.UpdatePasswordRequest;
 import me.tsaheylu.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -29,8 +31,13 @@ public interface UserService extends UserDetailsService {
     User registerNewUser(SignUpRequest signUpRequest);
 
     void verifyToken(String token);
+    void verifyEmail(String token);
 
     void resendToken(String existingVerificationToken);
+
+    void resetPassword(ResetPasswordRequest resetPasswordRequest);
+
+    void updatePassword(UpdatePasswordRequest updatePasswordRequest);
 
 
     //  public abstract String getAvatar(String id);

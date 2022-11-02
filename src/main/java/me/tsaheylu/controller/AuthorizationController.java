@@ -3,7 +3,9 @@ package me.tsaheylu.controller;
 import io.sentry.Sentry;
 import lombok.RequiredArgsConstructor;
 import me.tsaheylu.apiRequest.RefreshTokenRequest;
+import me.tsaheylu.apiRequest.ResetPasswordRequest;
 import me.tsaheylu.apiRequest.SignUpRequest;
+import me.tsaheylu.apiRequest.UpdatePasswordRequest;
 import me.tsaheylu.apiResponse.DefaultResponse;
 import me.tsaheylu.apiResponse.TokenRefreshResponse;
 import me.tsaheylu.common.Constants;
@@ -13,6 +15,7 @@ import me.tsaheylu.component.JwtUtil;
 import me.tsaheylu.exception.TokenExpiredException;
 import me.tsaheylu.exception.TokenInvalidException;
 import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
+import me.tsaheylu.exception.UserNotFoundException;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
 import me.tsaheylu.service.RefreshTokenService;
@@ -130,12 +133,29 @@ public class AuthorizationController {
     }
 
 
-    @PostMapping(value = "/verify")
+    @GetMapping(value = "/verify")
 //  @CrossOrigin(origins = "*", maxAge = 3600)
-    public ResponseEntity<?> verifyToken(@RequestParam String token) throws AuthenticationException {
+    public ResponseEntity<?> verifyToken(@RequestParam String token) {
 
         try {
             userService.verifyToken(token);
+        } catch (TokenInvalidException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "TokenInvalidException"), HttpStatus.BAD_REQUEST);
+        } catch (TokenExpiredException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "TokenExpiredException"), HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok().body(new DefaultResponse(true, "token verified successfully"));
+
+    }
+
+    @PostMapping(value = "/verifyEmail")
+//  @CrossOrigin(origins = "*", maxAge = 3600)
+    public ResponseEntity<?> verifyEmail(@RequestParam String token) {
+
+        try {
+            userService.verifyEmail(token);
         } catch (TokenInvalidException e) {
             logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "TokenInvalidException"), HttpStatus.BAD_REQUEST);
@@ -158,6 +178,34 @@ public class AuthorizationController {
             return new ResponseEntity<>(new DefaultResponse(false, "EmailVefifyException"), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(new DefaultResponse(true, "new token sent successfully"));
+
+    }
+
+    @PostMapping(value = "/resetPassword")
+//  @CrossOrigin(origins = "*", maxAge = 3600)
+    public ResponseEntity<?> resetPasswordRequest(@Valid @RequestBody ResetPasswordRequest resetPasswordRequest) throws AuthenticationException {
+
+        try {
+            userService.resetPassword(resetPasswordRequest);
+        } catch (UserNotFoundException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "User not found with email"), HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok().body(new DefaultResponse(true, "Password Reset email sent successfully"));
+
+    }
+
+    @PatchMapping(value = "/updatePassword")
+//  @CrossOrigin(origins = "*", maxAge = 3600)
+    public ResponseEntity<?> updatePassword(@Valid @RequestBody UpdatePasswordRequest updatePasswordRequest) throws AuthenticationException {
+
+        try {
+            userService.updatePassword(updatePasswordRequest);
+        } catch (UserNotFoundException e) {
+            logger.error("Exception Ocurred", e);
+            return new ResponseEntity<>(new DefaultResponse(false, "User not found with email"), HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok().body(new DefaultResponse(true, "Password Reset email sent successfully"));
 
     }
 }

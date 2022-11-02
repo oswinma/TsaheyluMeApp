@@ -18,4 +18,6 @@ public interface RefreshTokenService {
     int deleteByUserId(Long userId);
 
     RefreshToken updateToken(RefreshToken refreshToken);
+
+    void delete(RefreshToken refreshToken);
 }
