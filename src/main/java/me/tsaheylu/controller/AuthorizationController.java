@@ -12,10 +12,7 @@ import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
 import me.tsaheylu.common.TokenType;
 import me.tsaheylu.component.JwtUtil;
-import me.tsaheylu.exception.TokenExpiredException;
-import me.tsaheylu.exception.TokenInvalidException;
-import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
-import me.tsaheylu.exception.UserNotFoundException;
+import me.tsaheylu.exception.*;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
 import me.tsaheylu.service.RefreshTokenService;
@@ -125,7 +122,6 @@ public class AuthorizationController {
         try {
             userService.registerNewUser(signUpRequest);
         } catch (UserAlreadyExistAuthenticationException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(new DefaultResponse(true, "User registered successfully"));
@@ -140,10 +136,8 @@ public class AuthorizationController {
         try {
             userService.verifyToken(token);
         } catch (TokenInvalidException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "TokenInvalidException"), HttpStatus.BAD_REQUEST);
         } catch (TokenExpiredException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "TokenExpiredException"), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(new DefaultResponse(true, "token verified successfully"));
@@ -157,12 +151,11 @@ public class AuthorizationController {
         try {
             userService.verifyEmail(token);
         } catch (TokenInvalidException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "TokenInvalidException"), HttpStatus.BAD_REQUEST);
         } catch (TokenExpiredException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "TokenExpiredException"), HttpStatus.BAD_REQUEST);
         }
+
         return ResponseEntity.ok().body(new DefaultResponse(true, "email verified successfully"));
 
     }
@@ -174,7 +167,6 @@ public class AuthorizationController {
         try {
             userService.resendToken(token);
         } catch (TokenInvalidException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "EmailVefifyException"), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(new DefaultResponse(true, "new token sent successfully"));
@@ -188,7 +180,6 @@ public class AuthorizationController {
         try {
             userService.resetPassword(resetPasswordRequest);
         } catch (UserNotFoundException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "User not found with email"), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(new DefaultResponse(true, "Password Reset email sent successfully"));
@@ -202,7 +193,6 @@ public class AuthorizationController {
         try {
             userService.updatePassword(updatePasswordRequest);
         } catch (UserNotFoundException e) {
-            logger.error("Exception Ocurred", e);
             return new ResponseEntity<>(new DefaultResponse(false, "User not found with email"), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(new DefaultResponse(true, "Password Reset email sent successfully"));

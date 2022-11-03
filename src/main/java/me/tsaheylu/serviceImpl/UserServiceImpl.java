@@ -8,10 +8,7 @@ import me.tsaheylu.apiRequest.UpdatePasswordRequest;
 import me.tsaheylu.common.Constants;
 import me.tsaheylu.common.Texts;
 import me.tsaheylu.common.UserStatus;
-import me.tsaheylu.exception.OAuth2AuthenticationProcessingException;
-import me.tsaheylu.exception.TokenInvalidException;
-import me.tsaheylu.exception.UserAlreadyExistAuthenticationException;
-import me.tsaheylu.exception.UserNotFoundException;
+import me.tsaheylu.exception.*;
 import me.tsaheylu.model.LocalUser;
 import me.tsaheylu.model.RefreshToken;
 import me.tsaheylu.model.User;
@@ -201,7 +198,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void verifyEmail(String token) throws TokenInvalidException {
+    public void verifyEmail(String token) throws TokenInvalidException, EmailAlreadyVerifiedException {
 
         RefreshToken refreshToken = refreshTokenService.findByToken(token).orElseThrow(() -> new TokenInvalidException(token, "token not found"));
         refreshTokenService.verifyExpiration(refreshToken);
