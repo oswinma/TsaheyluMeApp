@@ -198,4 +198,5 @@ public class AuthorizationController {
         return ResponseEntity.ok().body(new DefaultResponse(true, "Password Reset email sent successfully"));
 
     }
+
 }
